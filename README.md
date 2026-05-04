@@ -1,2 +1,0 @@
-# paginanueva
-segunda pagina moderna
