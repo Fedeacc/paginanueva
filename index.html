@@ -1,0 +1,2467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitae.Lp - Recuerdos Impresos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Lora:ital@0;1&family=Josefin+Sans:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F5F0E8;--warm:#E8DFD0;--brown:#0f1642;--accent:#672f11;--soft:#9a7960;--light:#FAF7F2}
+html{scroll-behavior:smooth}
+body{background:var(--cream);font-family:"Lora",serif;color:var(--brown);overflow-x:hidden}
+
+#news-banner{
+  position:sticky;top:0;z-index:101;
+  background:var(--brown);color:var(--cream);
+  height:36px;display:flex;align-items:center;
+  overflow:hidden;
+  transition:height .4s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+}
+#news-banner.hidden-bar{height:0;opacity:0;pointer-events:none}
+
+.ticker-wrap{
+  display:flex;
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);
+}
+.ticker-track{
+  display:inline-flex;
+  animation:ticker 28s linear infinite;
+  will-change:transform;
+}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{
+  font-family:"DM Mono",monospace;
+  font-size:.62rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(245,240,232,.8);
+  padding:0 3rem;
+  flex-shrink:0;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.ticker-item strong{color:var(--cream);font-weight:500}
+.ticker-item .tick-sep{color:var(--accent);opacity:.7;font-size:.8rem;margin:0 .2rem}
+@keyframes ticker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+#site-nav{
+  padding:0 4rem;height:64px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(61,43,31,.12);
+  position:sticky;top:36px;
+  background:rgba(245,240,232,.96);
+  backdrop-filter:blur(8px);
+  z-index:100;
+  transition:top .4s cubic-bezier(.4,0,.2,1),transform .4s cubic-bezier(.4,0,.2,1),box-shadow .3s ease;
+}
+#site-nav.nav-hidden{transform:translateY(-100%)}
+#site-nav.nav-scrolled{box-shadow:0 2px 16px rgba(15,22,66,.08)}
+#site-nav.banner-gone{top:0}
+
+.logo{
+  font-family:"Playfair Display",serif;
+  font-size:2rem;
+  letter-spacing:.06em;
+  color:var(--brown);
+  text-decoration:none;
+  height:64px;
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  user-select:none;
+  line-height:1;
+  gap:.15em;
+}
+.logo em{color:var(--accent);font-style:italic}
+.logo-sub{
+  font-family:"DM Mono",monospace;
+  font-size:.52rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--soft);
+  display:block;
+  margin-top:.15rem;
+  font-style:normal;
+}
+.logo-inner{display:flex;flex-direction:column;justify-content:center}
+
+#site-nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+#site-nav a{text-decoration:none;color:var(--soft);font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:color .25s}
+#site-nav a:hover{color:var(--accent)}
+.nav-cta{background:var(--brown)!important;color:var(--cream)!important;padding:.5rem 1.2rem!important}
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{display:flex;align-items:center;gap:.4rem;cursor:pointer;color:var(--soft);font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:color .25s;background:none;border:none;padding:0}
+.nav-dropdown-toggle:hover{color:var(--accent)}
+.nav-caret{font-size:.55rem;transition:transform .25s;display:inline-block}
+.nav-dropdown.open .nav-caret{transform:rotate(180deg)}
+.nav-submenu{display:none;position:absolute;top:calc(100% + .8rem);left:0;background:rgba(245,240,232,.98);backdrop-filter:blur(12px);border:1px solid rgba(61,43,31,.1);min-width:180px;z-index:200;box-shadow:0 8px 24px rgba(15,22,66,.1)}
+.nav-dropdown.open .nav-submenu{display:block}
+.nav-submenu-item{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem;font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);cursor:pointer;transition:background .2s,color .2s;border:none;background:none;width:100%;text-align:left}
+.nav-submenu-item:hover{background:var(--warm);color:var(--accent)}
+.nav-sub-submenu{display:none;background:rgba(235,228,218,.98);border-top:1px solid rgba(61,43,31,.07)}
+.nav-sub-submenu.open{display:block}
+.nav-sub-item{display:block;padding:.6rem 1.8rem;font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);cursor:pointer;transition:background .2s,color .2s;border:none;background:none;width:100%;text-align:left}
+.nav-sub-item:hover{color:var(--accent);background:rgba(103,47,17,.04)}
+
+#nav-cart-btn{background:none;border:none;cursor:pointer;color:var(--soft);display:flex;align-items:center;justify-content:center;width:44px;height:44px;position:relative;transition:color .25s;flex-shrink:0}
+#nav-cart-btn:hover{color:var(--accent)}
+#nav-cart-count{background:var(--accent);color:white;font-family:"DM Mono",monospace;font-size:.58rem;font-weight:600;border-radius:50%;width:18px;height:18px;display:flex!important;align-items:center;justify-content:center;position:absolute;top:4px;right:2px;animation:pop .3s cubic-bezier(.36,.07,.19,.97)}
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+
+#nav-hamburger{display:none;background:none;border:none;cursor:pointer;width:44px;height:44px;flex-direction:column;gap:5px;align-items:center;justify-content:center;flex-shrink:0}
+#nav-hamburger span{display:block;width:22px;height:2px;background:var(--brown);transition:all .3s}
+.nav-right-mobile{display:none;align-items:center;gap:0}
+
+#bottom-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:rgba(245,240,232,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(61,43,31,.12);padding:.5rem 0 calc(.5rem + env(safe-area-inset-bottom));justify-content:space-around;align-items:center}
+.bb-btn{display:flex;flex-direction:column;align-items:center;gap:.25rem;background:none;border:none;cursor:pointer;color:var(--soft);font-family:"DM Mono",monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;transition:color .2s;text-decoration:none;position:relative}
+.bb-btn:hover,.bb-btn.active{color:var(--accent)}
+.bb-btn svg{width:20px;height:20px}
+#bb-cart-count{background:var(--accent);color:white;font-family:"DM Mono",monospace;font-size:.5rem;font-weight:700;border-radius:50%;width:16px;height:16px;display:none;align-items:center;justify-content:center;position:absolute;top:0;right:calc(50% - 18px)}
+
+#toast-container{position:fixed;top:5rem;right:1.5rem;z-index:9998;display:flex;flex-direction:column;gap:.6rem;pointer-events:none}
+.toast{background:var(--brown);color:var(--cream);font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.07em;padding:.75rem 1.2rem;box-shadow:0 4px 20px rgba(15,22,66,.22);display:flex;align-items:center;gap:.6rem;animation:toastIn .35s cubic-bezier(.22,1,.36,1) both;max-width:280px}
+.toast.removing{animation:toastOut .3s ease forwards}
+.toast-icon{font-size:1rem;flex-shrink:0}
+@keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(40px)}}
+
+.hero{padding:6rem 4rem 5rem;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;min-height:88vh}
+.hero-eyebrow{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::after{content:"";flex:1;height:1px;background:var(--accent);opacity:.3;max-width:60px}
+.hero h1{font-family:"Playfair Display",serif;font-size:5rem;line-height:1.05;font-weight:700;margin-bottom:1.8rem}
+.hero h1 em{color:var(--accent);font-style:italic;display:block}
+.hero-desc{font-size:1.05rem;color:var(--soft);line-height:1.85;max-width:420px;margin-bottom:2.8rem}
+.hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-p{display:inline-block;background:var(--brown);color:var(--cream);padding:.95rem 2.2rem;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .25s}
+.btn-p:hover{background:var(--accent)}
+.btn-g{display:inline-block;border:1px solid rgba(61,43,31,.35);color:var(--cream);padding:.95rem 2.2rem;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;background-color:var(--brown);transition:all .25s}
+.btn-g:hover{background:var(--accent)}
+.btn-f{display:inline-block;border:1px solid rgba(61,43,31,.35);color:var(--brown);padding:.95rem 2.2rem;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;background-color:var(--cream);transition:all .25s}
+.hero-visual{position:relative;width:100%;height:auto;display:flex;align-items:center;animation:fadeUp 1.1s .2s ease both}
+.main-slider{width:100%;height:auto;aspect-ratio:16/9;border-radius:4px;overflow:hidden;position:relative}
+.slider-track{display:flex;width:100%;height:100%;transition:transform 0.8s cubic-bezier(0.65,0,0.35,1)}
+.slide{min-width:100%;height:100%}
+.slide-content img{width:100%;height:100%;object-fit:cover;display:block}
+.s-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.8);border:none;width:45px;height:45px;cursor:pointer;color:var(--brown);font-size:1.2rem;transition:all 0.3s;z-index:5;display:flex;align-items:center;justify-content:center}
+.s-btn:hover{background:var(--brown);color:var(--cream)}
+.prev{left:0;border-radius:0 4px 4px 0}.next{right:0;border-radius:4px 0 0 4px}
+.slider-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--accent);width:0%;animation:progress 5s linear infinite}
+@keyframes progress{from{width:0%}to{width:100%}}
+.divider{text-align:center;padding:2.5rem 4rem;font-family:"DM Mono",monospace;font-size:.65rem;color:var(--soft);letter-spacing:.3em;text-transform:uppercase;position:relative}
+.divider::before,.divider::after{content:"";position:absolute;top:50%;height:1px;background:rgba(61,43,31,.12);width:calc(35% - 2rem)}
+.divider::before{left:4rem}.divider::after{right:4rem}
+.sec-ey{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.8rem;display:block}
+.sec-t{font-family:"Playfair Display",serif;font-size:2.8rem;font-weight:400;line-height:1.2}
+
+/* ═══ FUENTE TEXTOS CHICOS — Josefin Sans ═══ */
+.qty-hint,
+.imantadas-note,
+.cuad-pages-subtitle,
+.prod-info-body,
+.cart-footer-note,
+#cart-footer-note,
+.pol-footnote,
+#summary-note,
+.config-price-unit,
+.disenio-pick-label,
+.cuad-page-label,
+.size-card-dim,
+.a-loc,
+.imantadas-sub-label{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.82rem !important;
+  letter-spacing:.06em !important;
+  font-weight:300;
+  font-style:normal !important;
+  text-transform:uppercase;
+}
+.qty-hint,
+#summary-note,
+#cart-footer-note,
+.imantadas-note{
+  font-weight:400;
+  text-transform:none;
+  letter-spacing:.02em !important;
+}
+
+#productos{padding:6rem 4rem}
+.prod-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
+
+/* ═══ CARRUSEL DE PRODUCTOS — drag libre ═══ */
+.prod-carousel-wrap{position:relative;overflow:hidden}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.prod-carousel-track-wrap{
+  display:none;
+  overflow:hidden;
+  position:relative;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:pan-y; /* permite scroll vertical por defecto */
+}
+.prod-carousel-track-wrap.dragging{cursor:grabbing;touch-action:none}
+.prod-carousel-track{
+  display:flex;
+  gap:1rem;
+  width:fit-content; /* ← evita que el track se estire más allá de sus cards */
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.prod-carousel-track.no-transition{transition:none}
+.prod-carousel-track .prod-card{
+  flex:0 0 calc(82vw - 2.4rem); /* ancho de card = casi toda la pantalla menos el padding */
+  max-width:300px;
+  min-width:220px;
+}
+
+.prod-card{cursor:pointer;transition:transform .3s}
+.prod-card:hover{transform:translateY(-6px)}
+.prod-img{aspect-ratio:.82;position:relative;overflow:hidden;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;font-family:"DM Mono",monospace;font-size:.7rem;color:var(--soft);letter-spacing:.08em;text-transform:uppercase}
+.prod-badge{position:absolute;top:1rem;left:1rem;background:var(--brown);color:var(--cream);font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem}
+.prod-cat{font-family:"DM Mono",monospace;font-size:.65rem;color:var(--soft);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.prod-name{font-family:"Playfair Display",serif;font-size:1.25rem;margin-bottom:.6rem}
+.pi1{background:#DDD3C0}.pi2{background:#C4CFB9}.pi3{background:#D2BDB8}
+.carousel-dots{display:none;justify-content:center;gap:.5rem;margin-top:1rem}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(61,43,31,.2);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.carousel-dot.active{background:var(--accent);transform:scale(1.25)}
+
+#proceso{background:var(--brown);color:var(--cream);padding:7rem 4rem}
+.proc-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.proc-desc{color:rgba(245,240,232,.65);font-size:1rem;line-height:1.8;max-width:380px}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.paso{padding:2rem 1.5rem 2rem 0;border-top:1px solid rgba(245,240,232,.15)}
+.paso-n{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--accent);letter-spacing:.1em;margin-bottom:1.5rem;display:block}
+.paso h3{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:400;font-style:italic;color:var(--cream);margin-bottom:.9rem}
+.paso p{font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.6)}
+#galeria{padding:6rem 4rem;background:var(--light)}
+.gal-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem}
+.gal-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:1rem}
+.gi{display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-size:.65rem;color:var(--soft);letter-spacing:.08em;text-transform:uppercase;position:relative;overflow:hidden;min-height:180px;flex-direction:column;gap:.5rem}
+.gi .glbl{position:absolute;bottom:.8rem;left:.8rem;background:rgba(61,43,31,.75);color:var(--cream);font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.08em;padding:.25rem .6rem;text-transform:uppercase}
+.g1{grid-row:span 2;min-height:380px;background:#D9CCBA}.g2{background:#C5CDBA}.g3{background:#D4C2B0}.g4{background:#BFCAC4}.g5{background:#CABFB5}
+
+/* ═══ TESTIMONIOS — slider automático ═══ */
+#testimonios{padding:6rem 4rem}
+.test-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
+.test-sum strong{color:var(--accent);font-family:"Playfair Display",serif;font-size:2rem;font-weight:700;display:block;margin-bottom:.3rem}
+.test-sum span{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--soft)}
+.test-carousel-wrap{position:relative;overflow:hidden}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.test-carousel-track-wrap{
+  display:block; /* siempre visible */
+  overflow:hidden;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.test-carousel-track-wrap.dragging{cursor:grabbing}
+.test-carousel-track{display:flex;gap:1.5rem;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform;}
+.test-carousel-track.no-transition{transition:none}
+.test-carousel-track .tc{flex:0 0 calc(33.333% - 1rem);}
+.tc{background:white;padding:2rem 1.8rem;position:relative;transition:transform .3s;box-shadow:0 2px 16px rgba(61,43,31,.06)}
+.tc:hover{transform:translateY(-4px)}
+.tqm{position:absolute;top:1rem;right:1.5rem;font-family:"Playfair Display",serif;font-size:5rem;color:var(--warm);line-height:1;user-select:none}
+.stars{color:var(--accent);font-size:.8rem;letter-spacing:.15em;margin-bottom:1rem}
+.tc blockquote{font-family:"Playfair Display",serif;font-style:italic;font-size:1rem;line-height:1.75;margin-bottom:1.8rem;color:var(--brown)}
+.t-auth{display:flex;align-items:center;gap:.9rem}
+.av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-size:1.1rem;font-weight:600;color:white;flex-shrink:0;line-height:1;}
+.av1{background:var(--accent)}.av2{background:var(--soft)}.av3{background:var(--brown)}
+.a-name{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--brown);letter-spacing:.03em;font-weight:500;}
+.a-loc{font-family:"Josefin Sans",sans-serif;font-size:.72rem;font-weight:300;letter-spacing:.05em;color:var(--soft);margin-top:.25rem}
+.test-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem}
+
+.cta-s{padding:7rem 4rem;text-align:center;background:var(--brown);color:var(--cream);position:relative;overflow:hidden}
+.cta-s::before{content:"VITAE";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:"Playfair Display",serif;font-size:20rem;font-weight:700;font-style:italic;color:rgba(255,255,255,.03);white-space:nowrap;pointer-events:none;user-select:none}
+.cta-s h2{font-family:"Playfair Display",serif;font-size:3.5rem;font-weight:400;line-height:1.2;margin-bottom:1.5rem}
+.cta-s h2 em{font-style:italic;color:var(--accent)}
+.cta-s p{color:rgba(245,240,232,.65);font-size:1rem;line-height:1.8;margin-bottom:3rem;max-width:440px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:1}
+.btn-cr{display:inline-block;background:var(--cream);color:var(--brown);padding:.95rem 2.2rem;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s;text-decoration:none}
+.btn-cr:hover{background:var(--warm)}
+.btn-oc{display:inline-block;border:1px solid rgba(245,240,232,.35);color:var(--cream);padding:.95rem 2.2rem;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:transparent;transition:all .25s;text-decoration:none}
+.btn-oc:hover{border-color:var(--cream)}
+footer{background:rgba(245,240,232,.65);color:#672f11;padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:"Playfair Display",serif;font-size:1.3rem;color:var(--cream)}
+.f-logo em{color:var(--accent);font-style:italic}
+footer p{font-family:"DM Mono",monospace;font-size:.63rem;letter-spacing:.1em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-text{animation:fadeUp .9s ease both}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@keyframes pageFadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.page-detail.active{animation:pageFadeIn .38s cubic-bezier(.22,1,.36,1) both}
+
+#cart-overlay{display:none;position:fixed;inset:0;background:rgba(15,22,66,.35);z-index:199;backdrop-filter:blur(2px)}
+#cart-overlay.open{display:block}
+#cart-panel{position:fixed;top:0;right:-440px;width:420px;max-width:100vw;height:100vh;background:var(--cream);z-index:200;display:flex;flex-direction:column;transition:right .4s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(15,22,66,.18)}
+#cart-panel.open{right:0}
+#cart-panel-header{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1.6rem;border-bottom:1px solid rgba(61,43,31,.1);flex-shrink:0}
+#cart-close{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--soft);transition:color .2s;padding:.3rem}
+#cart-close:hover{color:var(--accent)}
+#cart-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem}
+#cart-items{flex:1;overflow-y:auto;padding:.5rem 0;display:none}
+.cart-item{display:grid;grid-template-columns:1fr auto;align-items:start;gap:.5rem;padding:1rem 1.6rem;border-bottom:1px solid rgba(61,43,31,.07);animation:fadeUp .25s ease}
+.cart-item-name{font-family:"Playfair Display",serif;font-size:.95rem;margin-bottom:.25rem}
+.cart-item-qty-price{display:flex;align-items:center;gap:.8rem;margin-top:.4rem}
+.qty-ctrl{display:flex;align-items:center;gap:.3rem;border:1px solid rgba(61,43,31,.18);padding:.15rem .3rem}
+.qty-btn{background:none;border:none;cursor:pointer;font-size:1rem;color:var(--brown);padding:0 .3rem;line-height:1;transition:color .2s}
+.qty-btn:hover{color:var(--accent)}
+.qty-val{font-family:"DM Mono",monospace;font-size:.75rem;min-width:1.2rem;text-align:center}
+.cart-item-price{font-family:"DM Mono",monospace;font-size:.82rem;color:var(--accent)}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:rgba(155,134,117,.5);font-size:.85rem;padding:.2rem;transition:color .2s;margin-top:.15rem}
+.cart-item-remove:hover{color:var(--accent)}
+#cart-coupon-section{padding:1rem 1.6rem;border-top:1px solid rgba(61,43,31,.07);display:none;flex-shrink:0}
+#coupon-row{display:flex;gap:.6rem}
+#coupon-input{flex:1;font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.06em;border:1px solid rgba(61,43,31,.22);padding:.6rem .9rem;background:white;color:var(--brown);outline:none;transition:border .2s}
+#coupon-input:focus{border-color:var(--accent)}
+#coupon-apply-btn{background:var(--brown);color:var(--cream);border:none;cursor:pointer;font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1rem;transition:background .2s}
+#coupon-apply-btn:hover{background:var(--accent)}
+#coupon-msg{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.05em;margin-top:.5rem;min-height:1rem}
+#coupon-msg.ok{color:#2a7a3b}
+#coupon-msg.err{color:#c0392b}
+#cart-summary{padding:.9rem 1.6rem 1rem;border-top:1px solid rgba(61,43,31,.1);display:none;flex-shrink:0}
+.summary-row{display:flex;justify-content:space-between;font-family:"DM Mono",monospace;font-size:.75rem;color:var(--soft);margin-bottom:.5rem}
+.total-row{font-size:.88rem;color:var(--brown);font-weight:600;border-top:1px solid rgba(61,43,31,.12);padding-top:.6rem;margin-top:.4rem;margin-bottom:.3rem}
+#summary-note{font-family:"Josefin Sans",sans-serif;font-size:.76rem;font-weight:400;color:var(--soft);letter-spacing:.03em;line-height:1.6;margin-top:.4rem;opacity:.8}
+#auto-discount-badge{display:none;background:rgba(42,122,59,.08);border:1px solid rgba(42,122,59,.2);color:#2a7a3b;font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.07em;padding:.4rem .8rem;margin-bottom:.6rem;align-items:center;gap:.4rem;}
+#cart-footer{padding:1rem 1.6rem 1.6rem;flex-shrink:0;border-top:1px solid rgba(61,43,31,.08)}
+
+/* ═══ MÍNIMO DE COMPRA ═══ */
+#cart-minimum-warning{
+  display:none;
+  background:rgba(103,47,17,.07);
+  border:1px solid rgba(103,47,17,.25);
+  color:var(--accent);
+  font-family:"Josefin Sans",sans-serif;
+  font-size:.78rem;
+  font-weight:400;
+  letter-spacing:.04em;
+  padding:.6rem 1rem;
+  margin-bottom:.7rem;
+  text-align:center;
+  line-height:1.4;
+}
+
+#cart-wsp-btn{width:100%;background:#25D366;color:white;border:none;cursor:pointer;font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:1rem;display:flex;align-items:center;justify-content:center;gap:.7rem;transition:background .25s,opacity .25s;margin-bottom:.7rem}
+#cart-wsp-btn:hover{background:#1ebe5d}
+#cart-wsp-btn:disabled{opacity:.45;cursor:not-allowed;background:#25D366}
+#cart-footer-note{font-family:"Josefin Sans",sans-serif;font-size:.76rem;font-weight:400;color:var(--soft);letter-spacing:.04em;text-align:center}
+
+.discount-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(42,122,59,.08);border:1px solid rgba(42,122,59,.25);color:#2a7a3b;font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.07em;padding:.3rem .7rem;margin-top:.5rem;}
+.discount-badge-wrap{min-height:1.6rem}
+
+.page-main{display:block}
+.page-detail{display:none}
+.page-detail.active{display:block}
+.page-main.hidden{display:none}
+
+/* ═══ BREADCRUMB — muestra historial ═══ */
+.breadcrumb{
+  padding:.9rem 4rem;
+  font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--soft);
+  display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+  border-bottom:2px solid rgba(61,43,31,.1);
+  background:var(--warm);
+  position:sticky;top:calc(64px + 36px);z-index:90;
+  transition:top .4s cubic-bezier(.4,0,.2,1),transform .4s cubic-bezier(.4,0,.2,1);
+}
+.breadcrumb.banner-gone{top:64px}
+.breadcrumb.crumb-hidden{transform:translateY(-200%);}
+.breadcrumb-back{display:inline-flex;align-items:center;gap:.45rem;background:var(--accent);border:none;cursor:pointer;font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);padding:.4rem .85rem .4rem .65rem;transition:background .2s,transform .15s;flex-shrink:0;margin-right:.5rem}
+.breadcrumb-back:hover{background:var(--brown)}
+.breadcrumb-back:active{transform:scale(.97)}
+.breadcrumb-back svg{flex-shrink:0}
+.breadcrumb .bc-sep{opacity:.4;cursor:default;font-size:.65rem}
+.breadcrumb .bc-crumb{cursor:pointer;transition:color .2s;color:var(--soft)}
+.breadcrumb .bc-crumb:hover{color:var(--accent)}
+.breadcrumb .bc-current{color:var(--brown);cursor:default;font-weight:500}
+
+.prod-page{padding:0}
+.prod-hero-band{display:grid;grid-template-columns:1fr 1fr;min-height:50vh;}
+.prod-hero-img{position:relative;overflow:hidden;background:#DDD3C0;display:flex;align-items:center;justify-content:center;}
+.prod-hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.prod-hero-img:hover img{transform:scale(1.03)}
+.prod-hero-text{padding:3.5rem 4rem;background:var(--brown);color:var(--cream);display:flex;flex-direction:column;justify-content:center;}
+.prod-hero-text .sec-ey{color:rgba(245,240,232,.45)}
+.prod-hero-text h2{font-family:"Playfair Display",serif;font-size:3.2rem;font-weight:400;color:var(--cream);line-height:1.05;margin:.5rem 0 1rem}
+.prod-hero-text h2 em{font-style:italic;color:var(--soft)}
+.prod-hero-text p{font-family:"Lora",serif;font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;max-width:380px}
+
+.sizes-section{padding:3rem 4rem 0}
+.sizes-section-title{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sizes-section-title::after{content:"";flex:1;height:1px;background:var(--accent);opacity:.25}
+.sizes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
+.size-card{border:2px solid rgba(61,43,31,.12);cursor:pointer;transition:all .25s;background:white;overflow:hidden;position:relative;}
+.size-card:hover{border-color:var(--soft);transform:translateY(-3px);box-shadow:0 8px 20px rgba(61,43,31,.1)}
+.size-card.selected{border-color:var(--accent);background:rgba(103,47,17,.04)}
+.size-card.selected::after{content:"✓";position:absolute;top:.5rem;right:.6rem;font-family:"DM Mono",monospace;font-size:.7rem;color:var(--accent);font-weight:600}
+.size-card-img{aspect-ratio:1;overflow:hidden;background:var(--warm);display:flex;align-items:center;justify-content:center}
+.size-card-img img{width:100%;height:100%;object-fit:cover}
+.size-card-body{padding:.8rem}
+.size-card-name{font-family:"Playfair Display",serif;font-size:1rem;color:var(--brown);margin-bottom:.2rem}
+.size-card-dim{font-family:"Josefin Sans",sans-serif;font-size:.72rem;letter-spacing:.08em;color:var(--soft);background:var(--warm);padding:.15rem .45rem;display:inline-block;margin-bottom:.4rem;font-weight:300;text-transform:uppercase}
+.size-card-price{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--accent);font-weight:500}
+
+.configurator{padding:2.5rem 4rem}
+.config-step{margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid rgba(61,43,31,.08)}
+.config-step:last-child{border-bottom:none}
+.config-step-label{font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.config-step-label span{background:var(--accent);color:var(--cream);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:600;flex-shrink:0}
+
+.qty-big{display:flex;align-items:center;gap:0;border:2px solid rgba(61,43,31,.15);width:fit-content}
+.qty-big-btn{background:var(--warm);border:none;cursor:pointer;width:48px;height:48px;font-size:1.3rem;color:var(--brown);transition:background .2s;display:flex;align-items:center;justify-content:center}
+.qty-big-btn:hover{background:var(--accent);color:var(--cream)}
+.qty-big-val{font-family:"DM Mono",monospace;font-size:1.1rem;width:64px;text-align:center;color:var(--brown);background:white;border:none;outline:none;height:48px;border-left:2px solid rgba(61,43,31,.12);border-right:2px solid rgba(61,43,31,.12)}
+.qty-hint{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.78rem !important;
+  font-weight:400;
+  letter-spacing:.05em !important;
+  color:var(--soft);
+  margin-top:.5rem;
+  line-height:1.6;
+  text-transform:none;
+}
+
+/* ═══ DISEÑOS POLAROIDS — CONTADOR ═══ */
+.disenios-picker{display:none;margin-top:.8rem}
+.disenios-picker.open{display:block}
+.disenios-pick-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:.75rem;
+  max-height:340px;
+  overflow-y:auto;
+  padding:.75rem;
+  background:rgba(61,43,31,.025);
+  border:1px solid rgba(61,43,31,.08);
+  overscroll-behavior:contain; /* ← evita que el scroll del picker arrastre la página */
+  -webkit-overflow-scrolling:touch;
+}
+/* Scroll nativo fluido en iOS sin bloquear el scroll de página */
+.disenios-pick-grid::-webkit-scrollbar{width:4px}
+.disenios-pick-grid::-webkit-scrollbar-thumb{background:rgba(103,47,17,.25);border-radius:2px}
+
+.disenio-pick-card{
+  background:white;
+  border:2px solid transparent;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+.disenio-pick-card:hover{border-color:var(--soft);box-shadow:0 4px 12px rgba(61,43,31,.1)}
+.disenio-pick-card.has-qty{border-color:var(--accent)}
+.disenio-pick-img{aspect-ratio:1;overflow:hidden;background:var(--warm)}
+.disenio-pick-img img{width:100%;height:100%;object-fit:cover;display:block}
+.disenio-pick-label{font-family:"Josefin Sans",sans-serif;font-size:.66rem;font-weight:300;letter-spacing:.05em;text-align:center;padding:.28rem .2rem;color:var(--soft);background:white;line-height:1.3;text-transform:uppercase}
+
+.dp-counter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(103,47,17,.06);
+  border-top:1px solid rgba(103,47,17,.15);
+  padding:.2rem .3rem;
+}
+.dp-counter-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--brown);font-size:.95rem;line-height:1;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+  flex-shrink:0;
+}
+.dp-counter-btn:hover{color:var(--accent)}
+.dp-counter-btn:disabled{opacity:.25;cursor:not-allowed}
+.dp-counter-val{
+  font-family:"DM Mono",monospace;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--accent);
+  min-width:1.5rem;
+  text-align:center;
+}
+.dp-counter-val.zero{color:rgba(61,43,31,.25)}
+
+.disenios-total-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:.6rem;
+  padding:.5rem .75rem;
+  background:var(--warm);
+  border:1px solid rgba(61,43,31,.1);
+  font-family:"Josefin Sans",sans-serif;
+  font-size:.76rem;
+  font-weight:300;
+  letter-spacing:.05em;
+  color:var(--brown);
+}
+.disenios-total-bar .dtb-count{font-weight:600;color:var(--accent);font-family:"DM Mono",monospace}
+.disenios-total-bar .dtb-max{color:var(--soft)}
+.disenios-total-bar.at-max .dtb-count{color:#2a7a3b}
+
+.extras-toggle-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem}
+.extras-toggle{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;border:2px solid rgba(61,43,31,.15);background:white;color:var(--soft);padding:.55rem 1.1rem;cursor:pointer;transition:all .2s}
+.extras-toggle:hover{border-color:var(--soft)}
+.extras-toggle.active{background:var(--brown);color:var(--cream);border-color:var(--brown)}
+
+.imantadas-sub{display:none;margin-top:.8rem;padding:1rem;background:rgba(103,47,17,.04);border:1px solid rgba(103,47,17,.15)}
+.imantadas-sub.open{display:block}
+.imantadas-sub-label{
+  font-family:"Josefin Sans",sans-serif;
+  font-size:.76rem;
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--soft);
+  margin-bottom:.6rem;
+}
+.imantadas-qty-row{display:flex;align-items:center;gap:.8rem}
+.imt-qty-btn{background:var(--warm);border:2px solid rgba(61,43,31,.15);cursor:pointer;width:36px;height:36px;font-size:1.1rem;color:var(--brown);transition:background .2s}
+.imt-qty-btn:hover{background:var(--accent);color:var(--cream)}
+.imt-qty-val{font-family:"DM Mono",monospace;font-size:1rem;width:48px;text-align:center;color:var(--brown)}
+.imantadas-note{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.78rem !important;
+  font-weight:400;
+  letter-spacing:.03em !important;
+  color:var(--soft);
+  margin-top:.5rem;
+  line-height:1.6;
+}
+
+.config-cta-area{background:var(--light);border:2px solid rgba(61,43,31,.1);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin:0 4rem 3rem;}
+.config-price-block{display:flex;align-items:center;gap:1.2rem}
+.config-price-label{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:.3rem}
+.config-price-main{font-family:"Playfair Display",serif;font-size:3rem;font-weight:700;color:var(--accent);line-height:1}
+.config-price-original{font-family:"DM Mono",monospace;font-size:.75rem;color:var(--soft);text-decoration:line-through;display:none;margin-top:.15rem}
+.config-price-unit{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.76rem !important;
+  font-weight:300;
+  letter-spacing:.04em;
+  color:var(--soft);
+  margin-top:.3rem;
+}
+.config-add-btn{background:var(--brown);color:var(--cream);border:none;cursor:pointer;font-family:"DM Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:1.2rem 2.8rem;transition:background .25s,transform .15s;white-space:nowrap}
+.config-add-btn:hover{background:var(--accent)}
+.config-add-btn:active{transform:scale(.98)}
+
+.prod-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;padding:2rem 4rem 5rem;}
+.prod-info-card{background:white;border-top:3px solid var(--accent);padding:1.4rem 1.5rem;box-shadow:0 2px 12px rgba(61,43,31,.06);transition:transform .25s,box-shadow .25s;}
+.prod-info-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(61,43,31,.1)}
+.prod-info-icon{font-size:1.4rem;margin-bottom:.7rem}
+.prod-info-title{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.prod-info-body{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.8rem !important;
+  font-weight:300;
+  letter-spacing:.04em !important;
+  color:var(--soft);
+  line-height:1.7;
+}
+.prod-info-body strong{color:var(--brown);font-weight:600;font-style:normal}
+
+.detail-header{padding:4rem 4rem 2rem}
+.detail-header .sec-ey{margin-bottom:.5rem}
+.detail-header h2{font-family:"Playfair Display",serif;font-size:3rem;font-weight:400}
+.detail-header p{color:var(--soft);font-size:.95rem;line-height:1.8;max-width:480px;margin-top:1rem}
+.variants-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:2rem 4rem 6rem}
+.variant-card{background:white;box-shadow:0 2px 16px rgba(61,43,31,.07);cursor:pointer;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.variant-card:hover{transform:translateY(-6px);box-shadow:0 8px 28px rgba(61,43,31,.14)}
+.variant-img{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;overflow:hidden}
+.variant-img img{width:100%;height:100%;object-fit:cover;display:block}
+.variant-tag{position:absolute;top:.8rem;right:.8rem;background:var(--brown);color:var(--cream);font-family:"DM Mono",monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem}
+.variant-tag.pop{background:var(--accent)}
+.variant-info{padding:1.2rem 1.4rem 1.5rem}
+.variant-info h3{font-family:"Playfair Display",serif;font-size:1.15rem;margin-bottom:.4rem}
+.variant-info p{font-family:"Josefin Sans",sans-serif;font-size:.8rem;font-weight:300;color:var(--soft);letter-spacing:.04em;line-height:1.65}
+.variant-price{font-family:"DM Mono",monospace;font-size:.85rem;color:var(--accent);font-weight:500;margin-top:.6rem;display:block}
+button.variant-cta{display:block;width:calc(100% - 2.8rem);margin:1rem 1.4rem 1.4rem;text-align:center;background:var(--brown);color:var(--cream);font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem;border:none;cursor:pointer;transition:background .25s}
+button.variant-cta:hover,button.variant-cta.added{background:var(--accent)}
+
+.pol-hero{background:var(--brown);padding:4rem 4rem 3.5rem;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end}
+.pol-hero::before{content:"VITAE";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:"Playfair Display",serif;font-size:16rem;font-weight:700;font-style:italic;color:rgba(255,255,255,.03);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-.02em}
+.pol-hero-left .sec-ey{color:rgba(245,240,232,.4);margin-bottom:1rem}
+.pol-hero-left h2{font-family:"Playfair Display",serif;font-size:4rem;font-weight:400;color:var(--cream);line-height:1.05}
+.pol-hero-left h2 em{font-style:italic;color:var(--soft)}
+.pol-hero-right p{font-family:"Lora",serif;font-size:.98rem;color:rgba(245,240,232,.55);line-height:1.9;max-width:380px}
+.pol-hero-right p strong{color:rgba(245,240,232,.85);font-weight:400}
+.disenios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1rem 4rem 5rem}
+.disenio-card{background:white;box-shadow:0 2px 14px rgba(61,43,31,.07);cursor:pointer;transition:transform .3s,box-shadow .3s;overflow:hidden}
+.disenio-card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(61,43,31,.14)}
+.disenio-img{aspect-ratio:1;overflow:hidden;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.disenio-img img{width:100%;height:100%;object-fit:cover}
+.disenio-label{padding:.8rem 1rem;font-family:"Josefin Sans",sans-serif;font-size:.72rem;font-weight:300;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:center;border-top:1px solid rgba(61,43,31,.06)}
+
+.imantadas-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:2rem 4rem 5rem;align-items:center}
+.imantadas-img-box{background:var(--warm);overflow:hidden;aspect-ratio:1;box-shadow:4px 6px 28px rgba(61,43,31,.14);display:flex;align-items:center;justify-content:center;font-size:4rem}
+.imantadas-img-box img{width:100%;height:100%;object-fit:cover}
+.imantadas-text h3{font-family:"Playfair Display",serif;font-size:1.8rem;margin-bottom:1.2rem;color:var(--brown)}
+.imantadas-text p{font-family:"Lora",serif;font-size:.95rem;color:var(--soft);line-height:1.85;margin-bottom:1rem}
+.imantadas-specs{margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem}
+.imantadas-spec{display:flex;gap:.8rem;align-items:flex-start;font-family:"Josefin Sans",sans-serif;font-size:.8rem;font-weight:300;letter-spacing:.04em;color:var(--soft)}
+.imantadas-spec strong{color:var(--brown);min-width:100px;font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+
+.pol-footnote{padding:1.6rem 4rem 4rem;font-family:"Josefin Sans",sans-serif;font-size:.76rem;font-weight:300;letter-spacing:.06em;color:var(--soft);display:flex;align-items:center;gap:.8rem;border-top:1px solid rgba(61,43,31,.08);background:var(--light)}
+.pol-footnote::before{content:'';display:block;width:24px;height:1px;background:var(--accent);opacity:.4;flex-shrink:0}
+
+/* ═══ CUADERNO — GRILLA DE PÁGINAS ═══ */
+.cuad-pages-section{padding:2.5rem 4rem 0}
+.cuad-pages-title{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;display:flex;align-items:center;gap:.8rem}
+.cuad-pages-title::after{content:"";flex:1;height:1px;background:var(--accent);opacity:.25}
+.cuad-pages-subtitle{
+  font-family:"Josefin Sans",sans-serif !important;
+  font-size:.8rem !important;
+  font-weight:300;
+  color:var(--soft);
+  letter-spacing:.03em !important;
+  margin-bottom:1.2rem;
+  line-height:1.7;
+}
+
+.cuad-pages-progress{
+  display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1rem;
+  padding:.6rem 1rem;
+  background:var(--warm);
+  border:1px solid rgba(61,43,31,.1);
+}
+.cpp-label{
+  font-family:"Josefin Sans",sans-serif;
+  font-size:.76rem;
+  font-weight:300;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--soft);
+  flex:1;
+}
+.cpp-count{font-family:"DM Mono",monospace;font-size:.9rem;font-weight:600;color:var(--accent)}
+.cpp-max{font-family:"Josefin Sans",sans-serif;font-size:.76rem;font-weight:300;color:var(--soft)}
+.cpp-count.complete{color:#2a7a3b}
+.cpp-bar-wrap{flex:1;max-width:140px;height:5px;background:rgba(61,43,31,.12);border-radius:3px;overflow:hidden}
+.cpp-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s ease}
+.cpp-bar-fill.complete{background:#2a7a3b}
+
+.cuad-pages-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.65rem;
+}
+.cuad-page-slot{
+  background:white;
+  border:2px solid rgba(61,43,31,.12);
+  overflow:hidden;
+  position:relative;
+  transition:all .2s;
+}
+.cuad-page-slot:hover{border-color:var(--soft)}
+.cuad-page-slot.has-qty{border-color:var(--accent);box-shadow:0 3px 10px rgba(103,47,17,.12)}
+
+.cuad-slot-img{
+  aspect-ratio:4/3;
+  background:var(--warm);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+.cuad-slot-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cuad-slot-img .slot-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;
+  width:100%;height:100%;
+  color:rgba(61,43,31,.25);
+}
+.cuad-slot-img .slot-placeholder svg{width:28px;height:28px;opacity:.4}
+.cuad-slot-img .slot-placeholder span{font-family:"Josefin Sans",sans-serif;font-size:.6rem;font-weight:300;letter-spacing:.06em;text-transform:uppercase;opacity:.5;text-align:center;padding:0 .3rem}
+
+.cuad-slot-number{
+  position:absolute;top:.35rem;left:.4rem;
+  background:rgba(15,22,66,.65);
+  color:white;
+  font-family:"DM Mono",monospace;
+  font-size:.5rem;font-weight:600;
+  padding:.15rem .4rem;
+  letter-spacing:.06em;
+}
+
+.cuad-slot-counter{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.2rem .3rem;
+  background:rgba(103,47,17,.05);
+  border-top:1px solid rgba(103,47,17,.12);
+}
+.csc-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--brown);font-size:.9rem;line-height:1;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;flex-shrink:0;
+}
+.csc-btn:hover{color:var(--accent)}
+.csc-btn:disabled{opacity:.2;cursor:not-allowed}
+.csc-val{
+  font-family:"DM Mono",monospace;
+  font-size:.8rem;font-weight:600;
+  min-width:1.4rem;text-align:center;
+  color:var(--accent);
+}
+.csc-val.zero{color:rgba(61,43,31,.2)}
+
+.cuad-page-label{
+  font-family:"Josefin Sans",sans-serif;
+  font-size:.64rem;
+  font-weight:300;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--soft);
+  padding:.28rem .4rem;
+  background:white;
+  text-align:center;
+  border-top:1px solid rgba(61,43,31,.06);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+#mobile-nav{display:none;position:fixed;inset:0;background:var(--cream);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:0;overflow-y:auto;padding:4rem 2rem}
+#mobile-nav.open{display:flex}
+#mobile-nav-close{position:absolute;top:1.2rem;right:1.6rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--soft)}
+.mob-nav-item{width:100%;max-width:320px;text-align:center}
+.mob-nav-link{display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:"Playfair Display",serif;font-size:1.8rem;color:var(--brown);text-decoration:none;transition:color .2s;padding:.6rem 0;cursor:pointer;background:none;border:none;width:100%}
+.mob-nav-link:hover{color:var(--accent)}
+.mob-caret{font-family:"DM Mono",monospace;font-size:.9rem;transition:transform .25s}
+.mob-nav-item.open .mob-caret{transform:rotate(180deg)}
+.mob-submenu{display:none;flex-direction:column;align-items:center;gap:0;border-top:1px solid rgba(61,43,31,.1);border-bottom:1px solid rgba(61,43,31,.1);margin:.3rem 0;padding:.4rem 0}
+.mob-nav-item.open .mob-submenu{display:flex}
+.mob-sub-item{display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:"DM Mono",monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding:.5rem 0;cursor:pointer;background:none;border:none;width:100%;transition:color .2s}
+.mob-sub-item:hover{color:var(--accent)}
+.mob-sub-submenu{display:none;flex-direction:column;align-items:center;gap:0;background:rgba(232,223,208,.4);width:100%}
+.mob-sub-submenu.open{display:flex}
+.mob-sub-sub-item{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);padding:.45rem 0;cursor:pointer;background:none;border:none;width:100%;text-align:center;transition:color .2s}
+.mob-sub-sub-item:hover{color:var(--accent)}
+
+@media(max-width:900px){
+  #news-banner{height:32px}
+  .ticker-item{font-size:.56rem;padding:0 2rem}
+  #site-nav{padding:0 1rem;height:54px;top:32px}
+  #site-nav.banner-gone{top:0}
+  #site-nav ul{display:none}
+  #nav-hamburger{display:flex!important}
+  .nav-right-mobile{display:flex!important}
+  .logo{height:54px;font-size:1.6rem}
+  .logo-sub{font-size:.44rem}
+  .logo-eslogan{display:none}
+  .breadcrumb{padding:.75rem 1rem;top:calc(54px + 32px);font-size:.65rem}
+  .breadcrumb.banner-gone{top:54px}
+  #bottom-bar{display:flex!important}
+  .page-main footer{padding-bottom:calc(2.5rem + 64px)}
+  .page-detail{padding-bottom:64px}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:4rem 1.2rem}
+  .hero h1{font-size:3.2rem}
+  #productos{padding:4rem 0}
+  .prod-hdr{padding:0 1.2rem;margin-bottom:2rem}
+  .prod-grid{display:none}
+  .prod-carousel-track-wrap{display:block;padding:0 1.2rem}
+  .prod-carousel-track{padding-bottom:.5rem}
+  .carousel-dots{display:flex}
+  /* En mobile los testimonios van en carrusel de 1 */
+  .test-grid{display:none}
+  .test-carousel-track .tc{flex:0 0 80vw;max-width:320px;}
+  #testimonios{padding:4rem 0}
+  .test-hdr{padding:0 1.2rem;margin-bottom:2rem}
+  .test-carousel-track-wrap{padding:0 1.2rem}
+  #proceso{padding:4rem 1.2rem}
+  #galeria{padding:4rem 1.2rem}
+  .cta-s{padding:4rem 1.2rem}
+  footer{padding:2.5rem 1.2rem;flex-direction:column;gap:1rem;text-align:center}
+  .proc-steps{grid-template-columns:1fr 1fr}
+  .gal-grid{grid-template-columns:1fr 1fr!important;grid-template-rows:auto!important}
+  .g1{grid-row:span 1!important;min-height:180px!important}
+  .gi{min-height:160px!important}
+  .proc-intro{grid-template-columns:1fr}
+  #cart-panel{width:100vw!important;right:-100vw}
+  #cart-panel.open{right:0!important}
+  .prod-hero-band{grid-template-columns:1fr!important}
+  .prod-hero-img{min-height:240px}
+  .prod-hero-text{padding:2rem 1.2rem}
+  .prod-hero-text h2{font-size:2.4rem}
+  .sizes-section{padding:2rem 1.2rem 0}
+  .configurator{padding:1.5rem 1.2rem}
+  .config-cta-area{margin:0 1.2rem 3rem;padding:1.5rem}
+  .config-price-main{font-size:2.2rem}
+  .prod-info-grid{padding:1.5rem 1.2rem 5rem;grid-template-columns:1fr 1fr}
+  .variants-grid{grid-template-columns:1fr 1fr!important;padding:1rem 1.2rem 4rem!important}
+  .disenios-grid{grid-template-columns:repeat(2,1fr);padding:1rem 1.2rem 4rem}
+  .pol-hero{grid-template-columns:1fr;padding:2.5rem 1.2rem 2rem}
+  .pol-hero-left h2{font-size:2.8rem}
+  .imantadas-layout{grid-template-columns:1fr;padding:1rem 1.2rem 4rem}
+  .detail-header,.detail-header-row{padding:2rem 1.2rem 1.5rem!important}
+  .cuad-pages-section{padding:2rem 1.2rem 0}
+  .cuad-pages-grid{grid-template-columns: repeat(3, 1fr) !important;gap:.5rem}
+  .disenios-pick-grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}
+  /* Testimonios desktop: 1 por pantalla en mobile */
+  .test-carousel-track{gap:1rem}
+}
+@media(min-width:901px){
+  /* Desktop: mostrar 3 testimonios, sin bottom-bar */
+  .test-carousel-track-wrap{padding:0}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.6rem}
+  .sizes-grid{grid-template-columns:repeat(2,1fr)}
+  .prod-info-grid{grid-template-columns:1fr}
+  .disenios-grid{grid-template-columns:repeat(2,1fr)}
+  .config-cta-area{flex-direction:column;align-items:stretch}
+  .config-add-btn{text-align:center}
+  .cuad-pages-grid{grid-template-columns: repeat(2, 1fr) !important;gap:.4rem}
+}
+</style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+<div id="cart-overlay" onclick="closeCart()"></div>
+
+<!-- CART PANEL -->
+<div id="cart-panel">
+  <div id="cart-panel-header">
+    <div>
+      <span style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--brown)">Tu carrito</span>
+      <span id="cart-count-label" style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--soft);letter-spacing:.1em;margin-left:.7rem"></span>
+    </div>
+    <button onclick="closeCart()" id="cart-close">✕</button>
+  </div>
+  <div id="cart-empty">
+    <div style="font-size:2.5rem;margin-bottom:1rem">🛒</div>
+    <p style="font-family:'Josefin Sans',sans-serif;font-size:.82rem;font-weight:300;letter-spacing:.04em;color:var(--soft);letter-spacing:.02em;text-align:center;line-height:1.8">Tu carrito está vacío.<br>Explorá los productos y sumá<br>lo que te interesa.</p>
+  </div>
+  <div id="cart-items"></div>
+  <div id="cart-coupon-section">
+    <div id="coupon-row">
+      <input id="coupon-input" type="text" placeholder="Código de descuento" autocomplete="off" oninput="this.value=this.value.toUpperCase()">
+      <button id="coupon-apply-btn" onclick="applyCoupon()">Aplicar</button>
+    </div>
+    <div id="coupon-msg"></div>
+  </div>
+  <div id="cart-summary">
+    <div id="auto-discount-badge">🏷️ <span id="auto-discount-text"></span></div>
+    <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">$0</span></div>
+    <div class="summary-row discount-row" id="discount-row" style="display:none">
+      <span id="discount-label">Descuento</span>
+      <span id="summary-discount" style="color:#2a7a3b">−$0</span>
+    </div>
+    <div class="summary-row total-row"><span>Total estimado</span><span id="summary-total">$0</span></div>
+    <p id="summary-note">* Los precios son orientativos. El valor final se confirma por WhatsApp.</p>
+  </div>
+  <div id="cart-footer">
+    <div id="cart-minimum-warning"></div>
+    <button id="cart-wsp-btn" onclick="sendCartToWhatsApp()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Consultar por WhatsApp
+    </button>
+    <p id="cart-footer-note">Sin compromiso · Coordinamos todo antes de confirmar</p>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div id="bottom-bar">
+  <button class="bb-btn" id="bb-inicio" onclick="showMain()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Inicio
+  </button>
+  <button class="bb-btn" id="bb-productos" onclick="scrollToOrShowMain('productos')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/></svg>
+    Productos
+  </button>
+  <button class="bb-btn" id="bb-cart" onclick="openCart()">
+    <span id="bb-cart-count">0</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Carrito
+  </button>
+  <a class="bb-btn" href="https://wa.me/5492215111026" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<!-- NEWS BANNER -->
+<div id="news-banner">
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<nav id="site-nav">
+  <a href="#" class="logo" onclick="showMain();return false;">
+  <img src="img/logo.webp" alt="Vitae" style="height:38px;width:auto;">
+  <span class="logo-eslogan" style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);padding-left:.9rem;border-left:1px solid rgba(61,43,31,.2);margin-left:.9rem;line-height:1.4;">Recuerdos<br>impresos</span>
+</a>
+  <ul>
+    <li class="nav-dropdown" id="navDropProd">
+      <button class="nav-dropdown-toggle" onclick="toggleNavDrop('navDropProd')">Productos <span class="nav-caret">▲</span></button>
+      <div class="nav-submenu">
+        <div style="position:relative" id="navSubPol">
+          <button class="nav-submenu-item" onclick="closeNavDrops();showDetail('polaroids')" style="justify-content:flex-start;gap:.5rem">Polaroids</button>
+          <button class="nav-submenu-item" onclick="toggleNavSubDrop('navSubPolMenu',this)" style="padding:.4rem 1.2rem;opacity:.7;font-size:.58rem">Ver tipos <span class="sub-caret">▲</span></button>
+          <div class="nav-sub-submenu" id="navSubPolMenu">
+            <button class="nav-sub-item" onclick="closeNavDrops();showDetail('disenios')">Diseños</button>
+            <button class="nav-sub-item" onclick="closeNavDrops();showDetail('imantadas')">Imantadas</button>
+          </div>
+        </div>
+        <button class="nav-submenu-item" onclick="closeNavDrops();showDetail('fotos')">Fotos</button>
+        <button class="nav-submenu-item" onclick="closeNavDrops();showDetail('cuadernos')">Cuadernos</button>
+      </div>
+    </li>
+    <li><a href="#proceso" onclick="scrollToOrShowMain('proceso');return false;">Proceso</a></li>
+    <li><a href="#galeria" onclick="scrollToOrShowMain('galeria');return false;">Galería</a></li>
+    <li><a href="#testimonios" onclick="scrollToOrShowMain('testimonios');return false;">Clientes</a></li>
+    <li><a href="#contacto" class="nav-cta" onclick="scrollToOrShowMain('contacto');return false;">Contacto</a></li>
+    <li>
+      <button id="nav-cart-btn" onclick="openCart()" title="Ver carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span id="nav-cart-count" style="display:none">0</span>
+      </button>
+    </li>
+  </ul>
+  <div class="nav-right-mobile">
+    <button id="nav-cart-btn-mobile" onclick="openCart()" title="Ver carrito" style="background:none;border:none;cursor:pointer;color:var(--soft);display:flex;align-items:center;justify-content:center;width:44px;height:54px;position:relative;transition:color .25s;flex-shrink:0;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span id="nav-cart-count-mobile" style="display:none;background:var(--accent);color:white;font-family:'DM Mono',monospace;font-size:.58rem;font-weight:600;border-radius:50%;width:18px;height:18px;align-items:center;justify-content:center;position:absolute;top:6px;right:2px">0</span>
+    </button>
+    <button id="nav-hamburger" onclick="document.getElementById('mobile-nav').classList.add('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div id="mobile-nav">
+  <button id="mobile-nav-close" onclick="document.getElementById('mobile-nav').classList.remove('open')">✕</button>
+  <div class="mob-nav-item" id="mobProd">
+    <button class="mob-nav-link" onclick="toggleMobDrop('mobProd')">Productos <span class="mob-caret">▲</span></button>
+    <div class="mob-submenu">
+      <div class="mob-nav-item" id="mobPol" style="width:100%;display:flex;flex-direction:column;align-items:center">
+        <div style="display:flex;align-items:center;width:100%;justify-content:center;gap:0">
+          <button class="mob-sub-item" style="flex:1;justify-content:center" onclick="closeMobileNav();showDetail('polaroids')">Polaroids</button>
+          <button class="mob-sub-item" style="width:36px;padding:.5rem .3rem;flex-shrink:0;font-size:.65rem" onclick="toggleMobSubDrop('mobPolSub')">▲</button>
+        </div>
+        <div class="mob-sub-submenu" id="mobPolSub">
+          <button class="mob-sub-sub-item" onclick="closeMobileNav();showDetail('disenios')">Diseños</button>
+          <button class="mob-sub-sub-item" onclick="closeMobileNav();showDetail('imantadas')">Imantadas</button>
+        </div>
+      </div>
+      <button class="mob-sub-item" onclick="closeMobileNav();showDetail('fotos')">Fotos</button>
+      <button class="mob-sub-item" onclick="closeMobileNav();showDetail('cuadernos')">Cuadernos</button>
+    </div>
+  </div>
+  <div class="mob-nav-item"><a class="mob-nav-link" href="#proceso" onclick="closeMobileNav();scrollToOrShowMain('proceso')">Proceso</a></div>
+  <div class="mob-nav-item"><a class="mob-nav-link" href="#galeria" onclick="closeMobileNav();scrollToOrShowMain('galeria')">Galería</a></div>
+  <div class="mob-nav-item"><a class="mob-nav-link" href="#testimonios" onclick="closeMobileNav();scrollToOrShowMain('testimonios')">Clientes</a></div>
+  <div class="mob-nav-item"><a class="mob-nav-link" href="#contacto" onclick="closeMobileNav();scrollToOrShowMain('contacto')">Contacto</a></div>
+</div>
+
+<!-- PROMO PAGES -->
+<div id="page-promo-verano" class="page-detail">
+  <div class="breadcrumb" id="bc-promo-verano"></div>
+  <div class="detail-header reveal"><span class="sec-ey">Promoción especial</span><h2>Pack Verano 2025</h2><p>Todo lo que necesitás para inmortalizar tus vacaciones.</p></div>
+  <div class="variants-grid">
+    <div class="variant-card reveal"><div class="variant-img" style="background:#DDD3C0"><span>🌊</span><span class="variant-tag pop">Pack</span></div><div class="variant-info"><h3>Pack Verano Básico</h3><p>6 polaroids clásicas + 10 fotos 10×15.</p><span class="variant-price">$5.500</span></div><button class="variant-cta" onclick="addToCart('Pack Verano Básico',5500,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#C8D2C0"><span>☀️</span><span class="variant-tag pop">Más completo</span></div><div class="variant-info"><h3>Pack Verano Premium</h3><p>10 polaroids + 15 fotos + cuaderno de viaje A5.</p><span class="variant-price">$9.800</span></div><button class="variant-cta" onclick="addToCart('Pack Verano Premium',9800,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#DACFC0"><span>🏖️</span></div><div class="variant-info"><h3>Pack Pareja</h3><p>8 polaroids + cuaderno A6 de bolsillo.</p><span class="variant-price">$7.200</span></div><button class="variant-cta" onclick="addToCart('Pack Verano Pareja',7200,this)">+ Agregar al carrito</button></div>
+  </div>
+</div>
+
+<div id="page-promo-proceso" class="page-detail">
+  <div class="breadcrumb" id="bc-promo-proceso"></div>
+  <div class="detail-header reveal"><span class="sec-ey">Detrás de cámara</span><h2>Nuestro proceso artesanal</h2><p>Cada pieza se hace a mano, con papel especial y tinta de alta calidad.</p></div>
+  <div class="variants-grid">
+    <div class="variant-card reveal" style="cursor:default;pointer-events:none"><div class="variant-img" style="background:#E0D5C5;font-size:3rem"><span>📸</span></div><div class="variant-info"><h3>01 — Me enviás tus fotos</h3><p>Por WhatsApp o Instagram.</p></div></div>
+    <div class="variant-card reveal" style="cursor:default;pointer-events:none"><div class="variant-img" style="background:#C5CDBA;font-size:3rem"><span>🖨️</span></div><div class="variant-info"><h3>02 — Impresión artesanal</h3><p>Papel de alta gramaje, tinta pigmentada.</p></div></div>
+    <div class="variant-card reveal" style="cursor:default;pointer-events:none"><div class="variant-img" style="background:#D4C2B0;font-size:3rem"><span>📦</span></div><div class="variant-info"><h3>03 — Embalado con amor</h3><p>Papel kraft y notita escrita a mano.</p></div></div>
+  </div>
+  <div style="text-align:center;padding:0 4rem 5rem"><button class="btn-p" onclick="showDetail('polaroids')">Ver productos →</button></div>
+</div>
+
+<div id="page-promo-kits" class="page-detail">
+  <div class="breadcrumb" id="bc-promo-kits"></div>
+  <div class="detail-header reveal"><span class="sec-ey">Regalos que se sienten</span><h2>Kits para regalar</h2><p>Ya lo pensamos por vos.</p></div>
+  <div class="variants-grid">
+    <div class="variant-card reveal"><div class="variant-img" style="background:#DDD3C0"><span>💒</span><span class="variant-tag pop">Más pedido</span></div><div class="variant-info"><h3>Kit Bodas</h3><p>Cuaderno + 10 polaroids + caja kraft.</p><span class="variant-price">$12.000</span></div><button class="variant-cta" onclick="addToCart('Kit Bodas',12000,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#C8D2C0"><span>🎂</span></div><div class="variant-info"><h3>Kit Cumpleaños</h3><p>6 polaroids + cuaderno A6 + stickers.</p><span class="variant-price">$7.500</span></div><button class="variant-cta" onclick="addToCart('Kit Cumpleaños',7500,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#D6C2B2"><span>🎓</span></div><div class="variant-info"><h3>Kit Egresados</h3><p>Tira + foto grupal 15×21 + cuaderno.</p><span class="variant-price">$8.900</span></div><button class="variant-cta" onclick="addToCart('Kit Egresados',8900,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#E8DFD0"><span>💑</span></div><div class="variant-info"><h3>Kit Aniversario</h3><p>4 polaroids + cuaderno A5 + sobre.</p><span class="variant-price">$9.200</span></div><button class="variant-cta" onclick="addToCart('Kit Aniversario',9200,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#DACFC0"><span>🧑‍🏫</span></div><div class="variant-info"><h3>Kit Día del Maestro</h3><p>Cuaderno A5 + 3 polaroids con mensaje.</p><span class="variant-price">$5.800</span></div><button class="variant-cta" onclick="addToCart('Kit Día del Maestro',5800,this)">+ Agregar al carrito</button></div>
+    <div class="variant-card reveal"><div class="variant-img" style="background:#C4CFB9"><span>✨</span><span class="variant-tag">Armá el tuyo</span></div><div class="variant-info"><h3>Kit Personalizado</h3><p>Contanos la ocasión y lo armamos.</p><span class="variant-price">a coordinar</span></div><button class="variant-cta" onclick="addToCart('Kit Personalizado',0,this)">+ Agregar al carrito</button></div>
+  </div>
+</div>
+
+<!-- POLAROIDS -->
+<div id="page-polaroids" class="page-detail prod-page">
+  <div class="breadcrumb" id="bc-polaroids"></div>
+  <div class="prod-hero-band">
+    <div class="prod-hero-img"><img src="img/polaroid comun.webp" alt="Polaroid" id="pol-hero-img"></div>
+    <div class="prod-hero-text">
+      <span class="sec-ey">Impresiones</span>
+      <h2>Polaroids<br><em>para siempre.</em></h2>
+      <p>Impresas en papel fotográfico de alta calidad con tinta pigmentada de larga duración y un espacio en blanco para que cada recuerdo lleve tus propias palabras, una fecha, una dedicatoria o ese recuerdo que merece quedar para siempre.</p>
+    </div>
+  </div>
+  <div class="sizes-section">
+    <div class="sizes-section-title">01 — Elegí el tamaño</div>
+    <div class="sizes-grid" id="pol-sizes-grid">
+      <div class="size-card" data-product="polaroids" data-id="strip" data-name="Polaroid Strip" data-dim="4,5 × 14,5 cm" data-price="650" data-img="img/polaroid strips.webp" onclick="selectSize(this,'polaroids')">
+        <div class="size-card-img"><img src="img/polaroid strips.webp" alt="Strip"></div>
+        <div class="size-card-body"><div class="size-card-name">Strip (Tira)</div><div class="size-card-dim">4,5 × 14,5 cm</div><div class="size-card-price">$650 c/u</div></div>
+      </div>
+      <div class="size-card selected" data-product="polaroids" data-id="comun" data-name="Polaroid Común" data-dim="5,5 × 8,5 cm" data-price="550" data-img="img/polaroid comun.webp" onclick="selectSize(this,'polaroids')">
+        <div class="size-card-img"><img src="img/polaroid comun.webp" alt="Común"></div>
+        <div class="size-card-body"><div class="size-card-name">Común ★</div><div class="size-card-dim">5,5 × 8,5 cm</div><div class="size-card-price">$550 c/u</div></div>
+      </div>
+      <div class="size-card" data-product="polaroids" data-id="cuadrada" data-name="Polaroid Cuadrada" data-dim="8 × 10 cm" data-price="650" data-img="img/polaroid cuadrada.jpeg" onclick="selectSize(this,'polaroids')">
+        <div class="size-card-img"><img src="img/polaroid cuadrada.jpeg" alt="Cuadrada"></div>
+        <div class="size-card-body"><div class="size-card-name">Cuadrada</div><div class="size-card-dim">8 × 10 cm</div><div class="size-card-price">$650 c/u</div></div>
+      </div>
+      <div class="size-card" data-product="polaroids" data-id="xl" data-name="Polaroid ExtraLarge" data-dim="5 × 12,5 cm" data-price="900" data-img="img/polaroid extralarge.webp" onclick="selectSize(this,'polaroids')">
+        <div class="size-card-img"><img src="img/polaroid extralarge.webp" alt="ExtraLarge"></div>
+        <div class="size-card-body"><div class="size-card-name">ExtraLarge</div><div class="size-card-dim">5 × 12,5 cm</div><div class="size-card-price">$900 c/u</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="configurator">
+    <div class="config-step">
+      <div class="config-step-label"><span>02</span> Cantidad de polaroids</div>
+      <div class="qty-big">
+        <button class="qty-big-btn" onclick="changeConfigQty('polaroids',-1)">−</button>
+        <input class="qty-big-val" id="pol-qty" type="number" min="1" max="999" value="1" oninput="updateConfigPrice('polaroids')">
+        <button class="qty-big-btn" onclick="changeConfigQty('polaroids',1)">+</button>
+      </div>
+      <div class="qty-hint">Pedido mínimo: 1 unidad · Precio por unidad según tamaño seleccionado</div>
+      <div class="discount-badge-wrap" id="pol-discount-info" style="margin-top:.6rem"></div>
+    </div>
+    <div class="config-step">
+      <div class="config-step-label"><span>03</span> Extras (opcional)</div>
+      <div class="extras-toggle-row">
+        <button class="extras-toggle" id="pol-toggle-disenio" onclick="toggleExtra('polaroids','disenio')">+ Diseño en el marco</button>
+        <button class="extras-toggle" id="pol-toggle-imantada" onclick="toggleExtra('polaroids','imantada')">+ Imantadas</button>
+      </div>
+
+      <div class="disenios-picker" id="pol-disenios-picker">
+        <div class="qty-hint" style="margin-bottom:.7rem">
+          Asigná cuántas polaroids llevan cada diseño. El total no puede superar la cantidad pedida.
+        </div>
+        <div class="disenios-total-bar" id="pol-disenios-total-bar">
+          <span class="dtb-count" id="pol-dtb-count">0</span>
+          <span class="dtb-max" id="pol-dtb-max">/ 1 polaroid con diseño</span>
+          <div style="flex:1;max-width:100px;height:4px;background:rgba(61,43,31,.12);border-radius:2px;overflow:hidden;margin-left:.6rem">
+            <div id="pol-dtb-bar" style="height:100%;background:var(--accent);border-radius:2px;transition:width .3s ease;width:0%"></div>
+          </div>
+        </div>
+        <div class="disenios-pick-grid" id="pol-disenios-pick-grid"></div>
+      </div>
+
+      <div class="imantadas-sub" id="pol-imantadas-sub">
+        <div class="imantadas-sub-label">¿Cuántas querés imantar? (del total pedido)</div>
+        <div class="imantadas-qty-row">
+          <button class="imt-qty-btn" onclick="changeImtQty('polaroids',-1)">−</button>
+          <span class="imt-qty-val" id="pol-imt-qty">1</span>
+          <button class="imt-qty-btn" onclick="changeImtQty('polaroids',1)">+</button>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--soft)">unidades</span>
+        </div>
+        <div class="imantadas-note">Precio adicional por imantado: <strong>+$500 c/u</strong> · Papel fotográfico 200g + imán de alta adherencia</div>
+      </div>
+    </div>
+  </div>
+  <div class="config-cta-area" id="pol-cta-area">
+    <div class="config-price-block">
+      <div>
+        <div class="config-price-label">Total estimado</div>
+        <div class="config-price-main" id="pol-price-display">$550</div>
+        <div class="config-price-original" id="pol-price-original"></div>
+        <div class="config-price-unit" id="pol-price-detail">1 × Polaroid Común · $550 c/u</div>
+      </div>
+    </div>
+    <button class="config-add-btn" onclick="addConfigToCart('polaroids')">+ Agregar al carrito</button>
+  </div>
+  <div class="prod-info-grid">
+    <div class="prod-info-card"><div class="prod-info-icon">⏱️</div><div class="prod-info-title">Tiempo de producción</div><div class="prod-info-body"><strong>3 a 5 días</strong></div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">📍</div><div class="prod-info-title">Punto de encuentro</div><div class="prod-info-body">Entrega en mano en el <strong>Centro de La Plata</strong> sin costo.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">🖨️</div><div class="prod-info-title">Material</div><div class="prod-info-body">Papel fotográfico Brillante Flexible de <strong>200 g</strong>. Borde blanco uniforme.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">✏️</div><div class="prod-info-title">Personalización</div><div class="prod-info-body">Podés escribir en el espacio inferior de cada polaroid. Coordinamos el texto y el diseño por WhatsApp.</div></div>
+    <div class="prod-info-card" style="border-top-color:#2a7a3b"><div class="prod-info-icon">🏷️</div><div class="prod-info-title">Descuentos por cantidad</div><div class="prod-info-body"><strong>10+ unidades:</strong> 10% off · <strong>20+ unidades:</strong> 15% off</div></div>
+  </div>
+</div>
+
+<!-- FOTOS -->
+<div id="page-fotos" class="page-detail prod-page">
+  <div class="breadcrumb" id="bc-fotos"></div>
+  <div class="prod-hero-band">
+    <div class="prod-hero-img"><img src="img/foto grande.webp" alt="Fotos" id="foto-hero-img"></div>
+    <div class="prod-hero-text">
+      <span class="sec-ey">Impresiones</span>
+      <h2>Fotos con<br><em>alma propia.</em></h2>
+      <p>Papel fotográfico profesional de alta gramaje, borde blanco que enmarca cada recuerdo. Disponibles en acabado brillante, un clásico que siempre permanece.</p>
+    </div>
+  </div>
+  <div class="sizes-section">
+    <div class="sizes-section-title">01 — Elegí el tamaño</div>
+    <div class="sizes-grid" id="foto-sizes-grid">
+      <div class="size-card" data-product="fotos" data-id="chica" data-name="Foto Chica" data-dim="9 × 13 cm" data-price="900" data-img="img/foto chica.webp" onclick="selectSize(this,'fotos')">
+        <div class="size-card-img"><img src="img/foto chica.webp" alt="Básica"></div>
+        <div class="size-card-body"><div class="size-card-name">Foto Básica</div><div class="size-card-dim">9 × 13 cm</div><div class="size-card-price">$900 c/u</div></div>
+      </div>
+      <div class="size-card selected" data-product="fotos" data-id="mediana" data-name="Foto Mediana" data-dim="10 × 14,5 cm" data-price="1000" data-img="img/foto mediana.webp" onclick="selectSize(this,'fotos')">
+        <div class="size-card-img"><img src="img/foto mediana.webp" alt="Mediana"></div>
+        <div class="size-card-body"><div class="size-card-name">Foto Mediana ★</div><div class="size-card-dim">10 × 14,5 cm</div><div class="size-card-price">$1000 c/u</div></div>
+      </div>
+      <div class="size-card" data-product="fotos" data-id="grande" data-name="Foto Grande" data-dim="13 × 18 cm" data-price="1700" data-img="img/foto grande.webp" onclick="selectSize(this,'fotos')">
+        <div class="size-card-img"><img src="img/foto grande.webp" alt="Grande"></div>
+        <div class="size-card-body"><div class="size-card-name">Foto Grande</div><div class="size-card-dim">13 × 18 cm</div><div class="size-card-price">$1.700 c/u</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="configurator">
+    <div class="config-step">
+      <div class="config-step-label"><span>02</span> Cantidad de fotos</div>
+      <div class="qty-big">
+        <button class="qty-big-btn" onclick="changeConfigQty('fotos',-1)">−</button>
+        <input class="qty-big-val" id="foto-qty" type="number" min="1" max="999" value="1" oninput="updateConfigPrice('fotos')">
+        <button class="qty-big-btn" onclick="changeConfigQty('fotos',1)">+</button>
+      </div>
+      <div class="qty-hint">Descuento automático a partir de 5 unidades del mismo tamaño</div>
+      <div class="discount-badge-wrap" id="foto-discount-info" style="margin-top:.6rem"></div>
+    </div>
+  </div>
+  <div class="config-cta-area" id="foto-cta-area">
+    <div class="config-price-block">
+      <div>
+        <div class="config-price-label">Total estimado</div>
+        <div class="config-price-main" id="foto-price-display">$1.000</div>
+        <div class="config-price-original" id="foto-price-original"></div>
+        <div class="config-price-unit" id="foto-price-detail">1 × Foto Mediana · $1.000 c/u</div>
+      </div>
+    </div>
+    <button class="config-add-btn" onclick="addConfigToCart('fotos')">+ Agregar al carrito</button>
+  </div>
+  <div class="prod-info-grid">
+    <div class="prod-info-card"><div class="prod-info-icon">⏱️</div><div class="prod-info-title">Tiempo de producción</div><div class="prod-info-body"><strong>3 a 5 días</strong></div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">📍</div><div class="prod-info-title">Punto de encuentro</div><div class="prod-info-body">Entrega en mano en el <strong>Centro de La Plata</strong> sin costo.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">🖨️</div><div class="prod-info-title">Material</div><div class="prod-info-body">Papel fotográfico Brillante Flexible de <strong>200 g</strong>. Borde blanco uniforme.</div></div>
+    <div class="prod-info-card" style="border-top-color:#2a7a3b"><div class="prod-info-icon">🏷️</div><div class="prod-info-title">Descuentos por cantidad</div><div class="prod-info-body"><strong>5+ fotos:</strong> 10% off · <strong>10+ fotos:</strong> 15% off</div></div>
+  </div>
+</div>
+
+<!-- CUADERNOS -->
+<div id="page-cuadernos" class="page-detail prod-page">
+  <div class="breadcrumb" id="bc-cuadernos"></div>
+  <div class="prod-hero-band">
+    <div class="prod-hero-img"><img src="img/cuaderno 1.webp" alt="Cuadernos" id="cuad-hero-img"></div>
+    <div class="prod-hero-text">
+      <span class="sec-ey">Papelería</span>
+      <h2>Cuadernos<br><em>que se sienten.</em></h2>
+      <p>Creado para recordar. Diseñados especialmente para vos, con tapa personalizada y páginas de cartulina premium de 250 gramos. Un detalle único para escribir, recordar y regalar.</p>
+    </div>
+  </div>
+  <div class="sizes-section">
+    <div class="sizes-section-title">01 — Elegí el diseño de tapa</div>
+    <div class="sizes-grid" id="cuad-sizes-grid">
+      <div class="size-card selected" data-product="cuadernos" data-id="c1" data-name="Cuaderno Tapa 1" data-dim="A5 · 14.8 × 21 cm" data-price="3500" data-img="img/cuaderno 1.webp" onclick="selectSize(this,'cuadernos')">
+        <div class="size-card-img"><img src="img/cuaderno 1.webp" alt="Tapa 1"></div>
+        <div class="size-card-body"><div class="size-card-name">Diseño 1</div><div class="size-card-dim">A5 · 14.8 × 21</div><div class="size-card-price">$3.500</div></div>
+      </div>
+      <div class="size-card" data-product="cuadernos" data-id="c2" data-name="Cuaderno Tapa 2" data-dim="A5 · 14.8 × 21 cm" data-price="3500" data-img="img/cuaderno 2.webp" onclick="selectSize(this,'cuadernos')">
+        <div class="size-card-img"><img src="img/cuaderno 2.webp" alt="Tapa 2"></div>
+        <div class="size-card-body"><div class="size-card-name">Diseño 2</div><div class="size-card-dim">A5 · 14.8 × 21</div><div class="size-card-price">$3.500</div></div>
+      </div>
+      <div class="size-card" data-product="cuadernos" data-id="c3" data-name="Cuaderno Tapa 3" data-dim="A5 · 14.8 × 21 cm" data-price="3500" data-img="img/cuaderno 3.webp" onclick="selectSize(this,'cuadernos')">
+        <div class="size-card-img"><img src="img/cuaderno 3.webp" alt="Tapa 3"></div>
+        <div class="size-card-body"><div class="size-card-name">Diseño 3</div><div class="size-card-dim">A5 · 14.8 × 21</div><div class="size-card-price">$3.500</div></div>
+      </div>
+      <div class="size-card" data-product="cuadernos" data-id="c4" data-name="Cuaderno Tapa 4" data-dim="A5 · 14.8 × 21 cm" data-price="3500" data-img="img/cuaderno 4.webp" onclick="selectSize(this,'cuadernos')">
+        <div class="size-card-img"><img src="img/cuaderno 4.webp" alt="Tapa 4"></div>
+        <div class="size-card-body"><div class="size-card-name">Diseño 4</div><div class="size-card-dim">A5 · 14.8 × 21</div><div class="size-card-price">$3.500</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cuad-pages-section">
+    <div class="cuad-pages-title">02 — Elegí las páginas de tu cuaderno</div>
+    <div class="cuad-pages-subtitle">
+      El cuaderno tiene <strong>8 páginas</strong>. Sumá la cantidad que querés de cada diseño — podés repetir. El total debe ser exactamente 8.
+    </div>
+    <div class="cuad-pages-progress" id="cuad-pages-progress">
+      <span class="cpp-label">Páginas seleccionadas:</span>
+      <span class="cpp-count" id="cuad-pages-count">0</span>
+      <span class="cpp-max">&nbsp;/ 8</span>
+      <div class="cpp-bar-wrap">
+        <div class="cpp-bar-fill" id="cuad-pages-bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="cuad-pages-grid" id="cuad-pages-grid"></div>
+  </div>
+  <div class="configurator">
+    <div class="config-step" style="border-bottom:none">
+      <div class="config-step-label"><span>03</span> Cantidad de cuadernos iguales</div>
+      <div class="qty-big">
+        <button class="qty-big-btn" onclick="changeConfigQty('cuadernos',-1)">−</button>
+        <input class="qty-big-val" id="cuad-qty" type="number" min="1" max="999" value="1" oninput="updateConfigPrice('cuadernos')">
+        <button class="qty-big-btn" onclick="changeConfigQty('cuadernos',1)">+</button>
+      </div>
+      <div class="qty-hint">Precio por unidad · Descuento para pedidos de evento (10+): consultanos</div>
+    </div>
+  </div>
+  <div class="config-cta-area" id="cuad-cta-area">
+    <div class="config-price-block">
+      <div>
+        <div class="config-price-label">Total estimado</div>
+        <div class="config-price-main" id="cuad-price-display">$3.500</div>
+        <div class="config-price-unit" id="cuad-price-detail">1 × Cuaderno Tapa 1 · $3.500 c/u</div>
+      </div>
+    </div>
+    <button class="config-add-btn" onclick="addConfigToCart('cuadernos')">+ Agregar al carrito</button>
+  </div>
+  <div class="prod-info-grid">
+    <div class="prod-info-card"><div class="prod-info-icon">⏱️</div><div class="prod-info-title">Tiempo de producción</div><div class="prod-info-body"><strong>3 a 5 días hábiles</strong>. Encuadernación artesanal hecha a mano, pedido por pedido.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">📍</div><div class="prod-info-title">Punto de encuentro</div><div class="prod-info-body">Retiro en mano en <strong>La Plata</strong> sin costo.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">📒</div><div class="prod-info-title">Interior</div><div class="prod-info-body"><strong>8 páginas</strong> a elección. Papel rígido de 300 g, anillado doble con hojales resistentes, cintas decoradas y esquineros negros.</div></div>
+    <div class="prod-info-card"><div class="prod-info-icon">✏️</div><div class="prod-info-title">Personalización total</div><div class="prod-info-body">Vos elegís cada página. Podés repetir diseños y combinarlos a gusto.</div></div>
+  </div>
+</div>
+
+<!-- DISEÑOS -->
+<div id="page-disenios" class="page-detail">
+  <div class="breadcrumb" id="bc-disenios"></div>
+  <div class="pol-hero">
+    <div class="pol-hero-left reveal"><span class="sec-ey">Polaroids · Diseños</span><h2>Diseños<br><em>disponibles.</em></h2></div>
+    <div class="pol-hero-right reveal" style="transition-delay:.1s"><p>Cada diseño se imprime en cualquiera de nuestros <strong>formatos de polaroid</strong>. El diseño va en el marco — tu foto, en el centro.</p></div>
+  </div>
+  <div class="disenios-grid reveal">
+    <div class="disenio-card"><div class="disenio-img" style="background:#DDD3C0"><img src="img/corazones 1.webp" alt="Corazones 1"></div><div class="disenio-label">Corazones 1</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#C8D2C0"><img src="img/corazones 2.webp" alt="Corazones 2"></div><div class="disenio-label">Corazones 2</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D6C2B2"><img src="img/arcoiris.webp" alt="Arcoíris"></div><div class="disenio-label">Arcoíris</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#E8DFD0"><img src="img/asteriscos.webp" alt="Asteriscos"></div><div class="disenio-label">Asteriscos</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#DACFC0"><img src="img/cuadrados amarillo.webp" alt="Cuadrados Amarillo"></div><div class="disenio-label">Cuadrados Amarillo</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#C4CFB9"><img src="img/cuadrados naranja.webp" alt="Cuadrados Naranja"></div><div class="disenio-label">Cuadrados Naranja</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D9CCBA"><img src="img/cuadrados verde.webp" alt="Cuadrados Verde"></div><div class="disenio-label">Cuadrados Verde</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#CABFB5"><img src="img/estrellas colores.webp" alt="Estrellas Colores"></div><div class="disenio-label">Estrellas Colores</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#BFC8C0"><img src="img/estrellas.webp" alt="Estrellas"></div><div class="disenio-label">Estrellas</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D2BDB8"><img src="img/frutillas.webp" alt="Frutillas"></div><div class="disenio-label">Frutillas</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D2BDB8"><img src="img/manchas.webp" alt="Manchas"></div><div class="disenio-label">Manchas</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D2BDB8"><img src="img/puntos.webp" alt="Puntos"></div><div class="disenio-label">Puntos</div></div>
+    <div class="disenio-card"><div class="disenio-img" style="background:#D2BDB8"><img src="img/vaca.webp" alt="Vaca"></div><div class="disenio-label">Vaca</div></div>
+  </div>
+  <div style="text-align:center;padding:0 4rem 5rem">
+    <button class="btn-p" onclick="showDetail('polaroids')">← Volver a Polaroids y elegir diseño</button>
+  </div>
+</div>
+
+<!-- IMANTADAS -->
+<div id="page-imantadas" class="page-detail">
+  <div class="breadcrumb" id="bc-imantadas"></div>
+  <div class="detail-header reveal"><span class="sec-ey">Polaroids · Especial</span><h2>Polaroids Imantadas</h2></div>
+  <div class="imantadas-layout reveal">
+    <div class="imantadas-img-box"><img src="img/imantada simple.png" alt="Polaroid imantada"></div>
+    <div class="imantadas-text">
+      <h3>Tu foto siempre a la vista</h3>
+      <p>Las polaroids imantadas tienen todo lo que amás de nuestras polaroids clásicas — el papel de alta calidad, el borde blanco característico, la posibilidad de escribir abajo — pero con un imán de alta adherencia en la parte de atrás.</p>
+      <p>Perfectas para la heladera, los lockers, pizarrones metálicos o cualquier superficie magnética. Una forma distinta de tener tus recuerdos siempre presentes.</p>
+      <div class="imantadas-specs">
+        <div class="imantadas-spec"><strong>Tamaño</strong> 10 × 13 cm (formato clásico)</div>
+        <div class="imantadas-spec"><strong>Papel</strong> Fotográfico 200g con laminado mate o brillante</div>
+        <div class="imantadas-spec"><strong>Imán</strong> Alta adherencia, no daña superficies</div>
+        <div class="imantadas-spec"><strong>Personalización</strong> Cualquier foto, diseño o texto</div>
+        <div class="imantadas-spec"><strong>Entrega</strong> 3 a 5 días hábiles</div>
+      </div>
+      <button class="btn-p" style="margin-top:1.5rem" onclick="showDetail('polaroids');setTimeout(()=>{document.getElementById('pol-toggle-imantada').click()},400)">
+        ← Configurar con imantado
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PÁGINA PRINCIPAL -->
+<div class="page-main" id="page-main">
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Impresiones Personalizadas</div>
+    <h1>Memorias<em>impresas</em>a mano.</h1>
+    <p class="hero-desc">Polaroids y cuadernos únicos que convierten tus momentos en objetos que se sienten, se guardan y se regalan para siempre.</p>
+    <div class="hero-actions"><a href="#proceso" class="btn-g">Cómo trabajamos →</a></div>
+  </div>
+  <div class="hero-visual">
+    <div class="main-slider">
+      <div class="slider-track" id="sliderTrack">
+        <div class="slide" onclick="showDetail('promo-verano')" style="cursor:pointer"><div class="slide-content pi1"><img src="img/slider disenios.png" alt="Polaroids" style="width:100%;height:100%;object-fit:cover"></div></div>
+        <div class="slide" onclick="showDetail('promo-proceso')" style="cursor:pointer"><div class="slide-content pi2"><img src="img/slider imantadas.png" alt="Imantadas" style="width:100%;height:100%;object-fit:cover"></div></div>
+        <div class="slide" onclick="showDetail('promo-kits')" style="cursor:pointer"><div class="slide-content pi3"><img src="img/slider disenios.png" alt="Kits" style="width:100%;height:100%;object-fit:cover"></div></div>
+      </div>
+      <button class="s-btn prev" onclick="moveSlider(-1)">❮</button>
+      <button class="s-btn next" onclick="moveSlider(1)">❯</button>
+      <div class="slider-progress"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; impresiones con alma &nbsp; ✦</div>
+
+<section id="productos">
+  <div class="prod-hdr reveal">
+    <div><span class="sec-ey">Catálogo</span><h2 class="sec-t">Nuestros productos</h2></div>
+    <a href="#contacto" class="btn-f">Ver todo →</a>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card reveal" onclick="showDetail('polaroids')"><div class="prod-img pi1"><span class="prod-badge">★ Bestseller</span><img src="img/polaroid cuadrada.jpeg" alt="Polaroids" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Impresiones</div><div class="prod-name">Polaroids</div></div>
+    <div class="prod-card reveal" onclick="showDetail('fotos')"><div class="prod-img pi1"><img src="img/foto mediana.webp" alt="Fotos" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Impresiones</div><div class="prod-name">Fotos</div></div>
+    <div class="prod-card reveal" onclick="showDetail('cuadernos')"><div class="prod-img pi1"><img src="img/cuaderno 2.webp" alt="Cuadernos" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Papelería</div><div class="prod-name">Cuadernos</div></div>
+  </div>
+  <!-- Carrusel drag libre -->
+  <div class="prod-carousel-track-wrap" id="prodCarouselWrap">
+    <div class="prod-carousel-track" id="prodCarouselTrack">
+      <div class="prod-card" onclick="showDetail('polaroids')"><div class="prod-img pi1"><span class="prod-badge">★ Bestseller</span><img src="img/polaroid cuadrada.jpeg" alt="Polaroids" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Impresiones</div><div class="prod-name">Polaroids</div></div>
+      <div class="prod-card" onclick="showDetail('fotos')"><div class="prod-img pi1"><img src="img/foto mediana.webp" alt="Fotos" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Impresiones</div><div class="prod-name">Fotos</div></div>
+      <div class="prod-card" onclick="showDetail('cuadernos')"><div class="prod-img pi1"><img src="img/cuaderno 2.webp" alt="Cuadernos" style="width:100%;height:100%;object-fit:cover"></div><div class="prod-cat">Papelería</div><div class="prod-name">Cuadernos</div></div>
+    </div>
+    <div class="carousel-dots" id="prodDots">
+      <button class="carousel-dot active" onclick="snapProdTo(0)"></button>
+      <button class="carousel-dot" onclick="snapProdTo(1)"></button>
+      <button class="carousel-dot" onclick="snapProdTo(2)"></button>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="proc-intro reveal">
+    <div><span class="sec-ey" style="color:rgba(245,240,232,.45)">Detrás de cámara</span><h2 class="sec-t" style="color:var(--cream)">Así creamos<br>cada pieza</h2></div>
+    <p class="proc-desc">Todo empieza con una conversación. Creamos cada producto de forma única, reflejando la esencia y la historia de quien lo elige.</p>
+  </div>
+  <div class="proc-steps">
+    <div class="paso reveal"><span class="paso-n">01</span><h3>Nos enviás tu idea</h3><p>Por WhatsApp contame qué querés crear.</p></div>
+    <div class="paso reveal" style="transition-delay:.1s"><span class="paso-n">02</span><h3>Diseño y prueba</h3><p>Hacemos pruebas de color para lograr una impresión fiel y destacar cada detalle de tus fotografías.</p></div>
+    <div class="paso reveal" style="transition-delay:.2s"><span class="paso-n">03</span><h3>Impresión</h3><p>Cada recuerdo merece un soporte especial. Por eso elegimos cartulina premium de 250 gramos, brillante y flexible.</p></div>
+    <div class="paso reveal" style="transition-delay:.3s"><span class="paso-n">04</span><h3>Te llega con amor</h3><p>Cada pedido se prepara con cuidado, desde el primer detalle hasta la entrega.</p></div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="gal-hdr reveal">
+    <div><span class="sec-ey">Trabajos</span><h2 class="sec-t">Lo que hemos creado</h2></div>
+    <a href="#contacto" class="btn-f">Encargar el tuyo →</a>
+  </div>
+  <div class="gal-grid reveal">
+    <!-- VIDEO: playsinline + muted + autoplay para mobile -->
+    <div class="gi g1">
+      <video src="img/1000264324.mp4"
+        style="width:100%;height:100%;object-fit:cover"
+        autoplay muted loop playsinline
+        webkit-playsinline
+        x5-playsinline
+        preload="auto"
+        poster="img/slider disenios.png">
+      </video>
+    </div>
+    <div class="gi g2"><img src="img/foto pedido mateo.jpeg" alt="Cuaderno bodas" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="gi g3"><img src="img/combo cumpleaños.webp" alt="Combo cumpleaños" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="gi g3"><img src="img/WhatsApp Image 2026-05-29 at 9.05.31 PM.jpeg" alt="Combo cumpleaños" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="gi g5"><img src="img/foto pedido foquita.jpeg" alt="Pack verano 2025" style="width:100%;height:100%;object-fit:cover"></div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="test-hdr reveal">
+    <div><span class="sec-ey">Clientes que confían</span><h2 class="sec-t">Lo que dicen de nosotros</h2></div>
+  </div>
+  <!-- Carrusel único (desktop 3 a la vez, mobile 1) -->
+  <div class="test-carousel-track-wrap" id="testCarouselWrap">
+    <div class="test-carousel-track" id="testCarouselTrack">
+      <div class="tc"><div class="tqm">"</div><blockquote>Me encantarooon! Están super lindas y bien hechas, cuando pueda encargaré otras. Muchas gracias 💗</blockquote><div class="t-auth"><div class="av av1">@</div><div><div class="a-name">@f.de.foquita</div><div class="a-loc">La plata · Pack Variado</div></div></div></div>
+      <div class="tc"><div class="tqm">"</div><blockquote>Pedí un cuaderno personalizado para mi mejor amiga y fue el regalo más especial que le di en años.</blockquote><div class="t-auth"><div class="av av2">@</div><div><div class="a-name">@sofiacarrizo</div><div class="a-loc">Córdoba · Cuaderno A5</div></div></div></div>
+      <div class="tc"><div class="tqm">"</div><blockquote>Le compré el Kit Memoria a mi pareja para nuestro aniversario. Se puso a llorar.</blockquote><div class="t-auth"><div class="av av3">@</div><div><div class="a-name">@julianperalta</div><div class="a-loc">La Plata · Kit Memoria</div></div></div></div>
+    </div>
+    <div class="test-dots" id="testDots">
+      <button class="carousel-dot active" onclick="goToTestSlide(0)"></button>
+      <button class="carousel-dot" onclick="goToTestSlide(1)"></button>
+      <button class="carousel-dot" onclick="goToTestSlide(2)"></button>
+    </div>
+  </div>
+</section>
+
+<section class="cta-s" id="contacto">
+  <h2>¿Tenés un momento<br>que merece ser <em>eterno</em>?</h2>
+  <p>Envianos tus fotos y creamos algo único juntos. Tiempos de entrega: 3 a 5 días hábiles. Retiros en el centro de La Plata.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/5492215111026" target="_blank" class="btn-cr">Escribir por WhatsApp</a>
+    <a href="https://instagram.com/vitae.lp" target="_blank" class="btn-oc">Seguirnos en Instagram</a>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">VI<em>TAE</em></div>
+  <p>© 2026 · Vitae · La Plata, Argentina</p>
+</footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  CONFIG GENERAL
+// ═══════════════════════════════════════
+const CART_MINIMUM = 1500; // mínimo de compra en pesos
+
+// ═══════════════════════════════════════
+//  TICKER
+// ═══════════════════════════════════════
+const TICKER_MSGS = [
+  'Código PADRE: 20% off en tu pedido',
+  'Nuevos diseños disponibles — Polaroids',
+  'Consultanos por packs para eventos',
+  'Retiro sin costo en La Plata',
+  `Pedido mínimo: $${CART_MINIMUM.toLocaleString('es-AR')}`,
+];
+(function buildTicker(){
+  const track = document.getElementById('tickerTrack');
+  let html = '';
+  for(let i=0;i<2;i++){
+    TICKER_MSGS.forEach(msg=>{
+      html += `<span class="ticker-item"><span class="tick-sep">✦</span><span>${msg}</span></span>`;
+    });
+  }
+  track.innerHTML = html;
+})();
+
+// ═══════════════════════════════════════
+//  DESCUENTOS
+// ═══════════════════════════════════════
+const QTY_DISCOUNTS = {
+  polaroids: [
+    { min: 20, pct: 15, label: '15% off — 20+ unidades 🎉' },
+    { min: 10, pct: 10, label: '10% off — 10+ unidades' },
+  ],
+  fotos: [
+    { min: 10, pct: 15, label: '15% off — 10+ fotos 🎉' },
+    { min: 5,  pct: 10, label: '10% off — 5+ fotos' },
+  ],
+};
+const AMOUNT_DISCOUNTS = [
+  { min: 15000, pct: 15, label: '15% off por compra mayor a $15.000 🎉' },
+  { min: 10000, pct: 10, label: '10% off por compra mayor a $10.000' },
+  { min: 5000,  pct: 5,  label: '5% off por compra mayor a $5.000' },
+];
+function getQtyDiscount(product, qty) {
+  const tiers = QTY_DISCOUNTS[product];
+  if (!tiers) return null;
+  for (const t of tiers) { if (qty >= t.min) return t; }
+  return null;
+}
+function getAmountDiscount(subtotal) {
+  for (const t of AMOUNT_DISCOUNTS) { if (subtotal >= t.min) return t; }
+  return null;
+}
+
+// ═══════════════════════════════════════
+//  CUPONES
+// ═══════════════════════════════════════
+const COUPONS={
+  'PADRE':{type:'percent',value:20,label:'20% de descuento'},
+  'VITAE15':{type:'percent',value:15,label:'15% de descuento'},
+  'VERANO25':{type:'percent',value:25,label:'25% de descuento — Promo Verano'},
+  'REGALO':{type:'percent',value:20,label:'20% de descuento — Código Regalo'},
+  'PRIMERA':{type:'fixed',value:500,label:'$500 off — Primera compra'}
+};
+let cart=[],appliedCoupon=null;
+
+function fmt(n){return'$'+n.toLocaleString('es-AR')}
+function showToast(msg,icon='✓'){const c=document.getElementById('toast-container');const t=document.createElement('div');t.className='toast';t.innerHTML=`<span class="toast-icon">${icon}</span><span>${msg}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('removing');setTimeout(()=>t.remove(),300)},2500)}
+function openCart(){document.getElementById('cart-panel').classList.add('open');document.getElementById('cart-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeCart(){document.getElementById('cart-panel').classList.remove('open');document.getElementById('cart-overlay').classList.remove('open');document.body.style.overflow=''}
+function addToCart(name,price,btn){const ex=cart.find(i=>i.name===name);if(ex)ex.qty++;else cart.push({name,price,qty:1});renderCart();showToast(name,'🛍️');if(btn){btn.classList.add('added');setTimeout(()=>btn.classList.remove('added'),1200)}}
+function changeQty(name,delta){const item=cart.find(i=>i.name===name);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(i=>i.name!==name);renderCart()}
+function removeItem(name){cart=cart.filter(i=>i.name!==name);renderCart()}
+
+function renderCart(){
+  const isEmpty=cart.length===0;
+  const totalQty=cart.reduce((s,i)=>s+i.qty,0);
+  const countEl=document.getElementById('nav-cart-count');countEl.textContent=totalQty;countEl.style.display=totalQty>0?'flex':'none';
+  const countMob=document.getElementById('nav-cart-count-mobile');countMob.textContent=totalQty;countMob.style.display=totalQty>0?'flex':'none';
+  const countBB=document.getElementById('bb-cart-count');countBB.textContent=totalQty;countBB.style.display=totalQty>0?'flex':'none';
+  document.getElementById('cart-count-label').textContent=totalQty>0?`${totalQty} ${totalQty===1?'producto':'productos'}`:'';
+  const emptyEl=document.getElementById('cart-empty'),itemsEl=document.getElementById('cart-items');
+  const couponEl=document.getElementById('cart-coupon-section'),summaryEl=document.getElementById('cart-summary');
+  if(isEmpty){
+    emptyEl.style.display='flex';itemsEl.style.display='none';couponEl.style.display='none';summaryEl.style.display='none';
+    appliedCoupon=null;
+    document.getElementById('coupon-input').value='';document.getElementById('coupon-msg').textContent='';document.getElementById('coupon-msg').className='';
+    document.getElementById('cart-minimum-warning').style.display='none';
+    return;
+  }
+  emptyEl.style.display='none';itemsEl.style.display='block';couponEl.style.display='block';summaryEl.style.display='block';
+  itemsEl.innerHTML=cart.map(item=>`<div class="cart-item"><div><div class="cart-item-name">${item.name}</div><div class="cart-item-qty-price"><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g,"\\'")}' ,-1)">−</button><span class="qty-val">${item.qty}</span><button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g,"\\'")}',1)">+</button></div>${item.price>0?`<span class="cart-item-price">${fmt(item.price*item.qty)}</span>`:`<span class="cart-item-price" style="color:var(--soft)">a coordinar</span>`}</div></div><button class="cart-item-remove" onclick="removeItem('${item.name.replace(/'/g,"\\'")}')">✕</button></div>`).join('');
+  const subtotal=cart.reduce((s,i)=>s+(i.price*i.qty),0);
+  let discount=0, discountLabel='Descuento', autoDiscountText='';
+  if(appliedCoupon){
+    const c=COUPONS[appliedCoupon];
+    if(c.type==='percent'){discount=Math.round(subtotal*c.value/100);discountLabel=`Descuento (${c.value}%)`}
+    else{discount=Math.min(c.value,subtotal);discountLabel=`Descuento (${appliedCoupon})`}
+  } else {
+    const amtDisc = getAmountDiscount(subtotal);
+    if(amtDisc){discount = Math.round(subtotal * amtDisc.pct / 100);discountLabel = `Descuento automático (${amtDisc.pct}%)`;autoDiscountText = amtDisc.label;}
+  }
+  const total=Math.max(0,subtotal-discount);
+  const badge = document.getElementById('auto-discount-badge');
+  const badgeText = document.getElementById('auto-discount-text');
+  if(autoDiscountText && !appliedCoupon){badge.style.display='flex'; badgeText.textContent=autoDiscountText;}
+  else{badge.style.display='none';}
+  document.getElementById('summary-subtotal').textContent=fmt(subtotal);
+  document.getElementById('summary-total').textContent=total>0?fmt(total):'a coordinar';
+  document.getElementById('discount-label').textContent=discountLabel;
+  document.getElementById('summary-discount').textContent=discount>0?`−${fmt(discount)}`:'−$0';
+  document.getElementById('discount-row').style.display=(appliedCoupon||discount>0)?'flex':'none';
+
+  // ═══ MÍNIMO DE COMPRA ═══
+  const minWarning = document.getElementById('cart-minimum-warning');
+  const wspBtn = document.getElementById('cart-wsp-btn');
+  const paidItems = cart.filter(i=>i.price>0);
+  const paidTotal = paidItems.reduce((s,i)=>s+(i.price*i.qty),0);
+  const meetsMin = paidTotal === 0 || paidTotal >= CART_MINIMUM;
+  // Si hay solo ítems "a coordinar" (precio 0), igual permitir
+  const hasOnlyFree = paidItems.length === 0;
+
+  if(!meetsMin && !hasOnlyFree){
+    const falta = CART_MINIMUM - paidTotal;
+    minWarning.style.display='block';
+    minWarning.textContent=`Pedido mínimo: ${fmt(CART_MINIMUM)}. Te falta agregar ${fmt(falta)} más.`;
+    wspBtn.disabled=true;
+  } else {
+    minWarning.style.display='none';
+    wspBtn.disabled=false;
+  }
+}
+
+function applyCoupon(){
+  const code=document.getElementById('coupon-input').value.trim().toUpperCase();
+  const msg=document.getElementById('coupon-msg');
+  if(!code){msg.textContent='Ingresá un código primero.';msg.className='err';return}
+  if(COUPONS[code]){appliedCoupon=code;msg.textContent=`✓ ${COUPONS[code].label} aplicado`;msg.className='ok';renderCart()}
+  else{appliedCoupon=null;msg.textContent='Código no válido o expirado.';msg.className='err';renderCart()}
+}
+
+function sendCartToWhatsApp(){
+  if(cart.length===0)return;
+  const subtotal=cart.reduce((s,i)=>s+(i.price*i.qty),0);
+  const paidTotal=cart.filter(i=>i.price>0).reduce((s,i)=>s+(i.price*i.qty),0);
+  if(paidTotal > 0 && paidTotal < CART_MINIMUM){
+    showToast(`Pedido mínimo: ${fmt(CART_MINIMUM)}`,'⚠️');
+    return;
+  }
+  let discount=0,discountLabel='';
+  if(appliedCoupon){
+    const c=COUPONS[appliedCoupon];
+    discount=c.type==='percent'?Math.round(subtotal*c.value/100):Math.min(c.value,subtotal);
+    discountLabel=`Cupón ${appliedCoupon}`;
+  } else {
+    const amtDisc=getAmountDiscount(subtotal);
+    if(amtDisc){discount=Math.round(subtotal*amtDisc.pct/100);discountLabel=`Descuento automático ${amtDisc.pct}%`}
+  }
+  const total=Math.max(0,subtotal-discount);
+  let msg='¡Hola! Me interesa hacer un pedido 🛍️\n\n*Productos seleccionados:*\n';
+  cart.forEach(i=>{const lt=i.price>0?fmt(i.price*i.qty):'a coordinar';msg+=`• ${i.name} x${i.qty} — ${lt}\n`});
+  msg+=`\n*Subtotal:* ${fmt(subtotal)}`;
+  if(discount>0){msg+=`\n*Descuento (${discountLabel}):* −${fmt(discount)}`;msg+=`\n*Total estimado:* ${fmt(total)}`}
+  msg+='\n\n¿Podemos coordinar los detalles? ¡Gracias! 🙏';
+  window.open(`https://wa.me/5492215111026?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ═══════════════════════════════════════
+//  CARRITO SWIPE
+// ═══════════════════════════════════════
+(function(){
+  const panel=document.getElementById('cart-panel');let startX=0,currentX=0,dragging=false;
+  panel.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;dragging=true},{passive:true});
+  panel.addEventListener('touchmove',e=>{if(!dragging)return;currentX=e.touches[0].clientX-startX;if(currentX>0){panel.style.transform=`translateX(${currentX}px)`;panel.style.transition='none'}},{passive:true});
+  panel.addEventListener('touchend',()=>{dragging=false;panel.style.transition='';if(currentX>100)closeCart();panel.style.transform='';currentX=0});
+})();
+
+// ═══════════════════════════════════════
+//  CARRUSEL PRODUCTOS — drag libre
+// ═══════════════════════════════════════
+(function initProdCarousel(){
+  const wrap  = document.getElementById('prodCarouselWrap');
+  const track = document.getElementById('prodCarouselTrack');
+  if(!wrap || !track) return;
+
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let animId = null;
+  let activeIdx = 0;
+  const GAP = 16; // 1rem gap
+
+  function getCardWidth(){
+    const card = track.querySelector('.prod-card');
+    return card ? card.offsetWidth + GAP : 0;
+  }
+  function getMaxTranslate(){
+    const cards = track.querySelectorAll('.prod-card');
+    const total = cards.length;
+    const cw = getCardWidth();
+    return -(cw * (total - 1));
+  }
+  function setTranslate(x, animated){
+    if(animated) track.style.transition = 'transform .35s cubic-bezier(.4,0,.2,1)';
+    else track.classList.add('no-transition');
+    track.style.transform = `translateX(${x}px)`;
+    if(!animated) requestAnimationFrame(()=>track.classList.remove('no-transition'));
+  }
+  function snapTo(idx){
+    const cw = getCardWidth();
+    activeIdx = Math.max(0, Math.min(idx, track.querySelectorAll('.prod-card').length - 1));
+    currentTranslate = -activeIdx * cw;
+    prevTranslate = currentTranslate;
+    setTranslate(currentTranslate, true);
+    updateProdDots(activeIdx);
+  }
+  window.snapProdTo = snapTo;
+
+  function updateProdDots(idx){
+    document.querySelectorAll('#prodDots .carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  }
+
+  // Mouse
+  wrap.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.clientX;
+    wrap.classList.add('dragging');
+    track.style.transition = 'none';
+  });
+  window.addEventListener('mousemove', e => {
+    if(!isDragging) return;
+    const dx = e.clientX - startX;
+    const raw = prevTranslate + dx;
+    const max = getMaxTranslate();
+    // rubber band al final
+    currentTranslate = raw > 0 ? raw * 0.2 : raw < max ? max + (raw - max) * 0.2 : raw;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  });
+  window.addEventListener('mouseup', e => {
+    if(!isDragging) return;
+    isDragging = false;
+    wrap.classList.remove('dragging');
+    const dx = e.clientX - startX;
+    const cw = getCardWidth();
+    const THRESHOLD = 0.18; // 18% de la card alcanza para pasar
+    const rawIdx = -currentTranslate / cw;
+    let movedCards;
+    if(dx < 0 && rawIdx > activeIdx + THRESHOLD) movedCards = activeIdx + 1;
+    else if(dx > 0 && rawIdx < activeIdx - THRESHOLD) movedCards = activeIdx - 1;
+    else movedCards = activeIdx;
+    snapTo(movedCards);
+    prevTranslate = currentTranslate;
+  });
+
+  // Touch — bloquea scroll vertical cuando el gesto es horizontal
+  // CLAVE: touchstart passive:false para poder llamar preventDefault antes que el browser tome el control
+  let startY = 0;
+  let gestureDecided = false;
+  let isHorizontal = false;
+
+  wrap.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    gestureDecided = false;
+    isHorizontal = false;
+    isDragging = false;
+    track.style.transition = 'none';
+  }, {passive:false}); // passive:false = podemos bloquear scroll desde el inicio
+
+  wrap.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+
+    if(!gestureDecided){
+      // Decidir con el primer movimiento de ≥4px en cualquier eje
+      if(Math.abs(dx) > 4 || Math.abs(dy) > 4){
+        gestureDecided = true;
+        // Horizontal si el movimiento lateral supera al vertical
+        isHorizontal = Math.abs(dx) >= Math.abs(dy);
+        if(isHorizontal){
+          isDragging = true;
+          wrap.classList.add('dragging');
+        }
+      }
+    }
+
+    if(isHorizontal){
+      // Bloquear scroll de la página mientras arrastramos horizontalmente
+      e.preventDefault();
+      const raw = prevTranslate + dx;
+      const max = getMaxTranslate();
+      currentTranslate = raw > 0 ? raw * 0.18 : raw < max ? max + (raw - max) * 0.18 : raw;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+    // Si es vertical, no hacemos nada → el browser scrollea la página normalmente
+  }, {passive:false});
+
+  wrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    gestureDecided = false;
+
+    if(!isDragging){
+      isHorizontal = false;
+      track.style.transition = 'transform .35s cubic-bezier(.4,0,.2,1)';
+      track.style.transform = `translateX(${prevTranslate}px)`;
+      return;
+    }
+    isDragging = false;
+    isHorizontal = false;
+    wrap.classList.remove('dragging');
+    const cw = getCardWidth();
+    const THRESHOLD = 0.18; // 18% de la card alcanza para pasar
+    const rawIdx = -currentTranslate / cw;
+    let movedCards;
+    if(dx < 0 && rawIdx > activeIdx + THRESHOLD) movedCards = activeIdx + 1;
+    else if(dx > 0 && rawIdx < activeIdx - THRESHOLD) movedCards = activeIdx - 1;
+    else movedCards = activeIdx;
+    snapTo(movedCards);
+    prevTranslate = currentTranslate;
+  }, {passive:true});
+
+  // Prevenir click en drag
+  track.addEventListener('click', e => {
+    if(Math.abs(currentTranslate - prevTranslate) > 8) e.stopPropagation();
+  }, true);
+})();
+
+// ═══════════════════════════════════════
+//  SLIDER TESTIMONIOS — automático + drag
+// ═══════════════════════════════════════
+(function initTestCarousel(){
+  const wrap  = document.getElementById('testCarouselWrap');
+  const track = document.getElementById('testCarouselTrack');
+  if(!wrap || !track) return;
+
+  let activeIdx = 0;
+  let autoTimer = null;
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+
+  const TOTAL = track.querySelectorAll('.tc').length;
+  const AUTO_INTERVAL = 4000;
+
+  function isMobile(){ return window.innerWidth <= 900; }
+
+  function getCardWidth(){
+    const card = track.querySelector('.tc');
+    if(!card) return 0;
+    const gap = isMobile() ? 16 : 24;
+    return card.offsetWidth + gap;
+  }
+
+  function visibleCount(){
+    if(isMobile()) return 1;
+    return 3; // en desktop siempre 3 visibles
+  }
+
+  function maxIdx(){
+    const vc = visibleCount();
+    return Math.max(0, TOTAL - vc);
+  }
+
+  function snapTo(idx, animated=true){
+    activeIdx = Math.max(0, Math.min(idx, maxIdx()));
+    const cw = getCardWidth();
+    currentTranslate = -activeIdx * cw;
+    prevTranslate = currentTranslate;
+    if(animated) track.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1)';
+    else { track.style.transition='none'; requestAnimationFrame(()=>track.style.transition=''); }
+    track.style.transform = `translateX(${currentTranslate}px)`;
+    updateDots();
+  }
+  window.goToTestSlide = idx => { snapTo(idx); resetAuto(); };
+
+  function updateDots(){
+    document.querySelectorAll('#testDots .carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===activeIdx));
+    // En desktop ocultar dots si todo cabe
+    const dotsEl = document.getElementById('testDots');
+    if(dotsEl) dotsEl.style.display = maxIdx() === 0 ? 'none' : 'flex';
+  }
+
+  function next(){ snapTo(activeIdx >= maxIdx() ? 0 : activeIdx+1); }
+
+  function startAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, AUTO_INTERVAL);
+  }
+  function resetAuto(){ startAuto(); }
+
+  // Touch/drag
+  wrap.addEventListener('touchstart', e => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    track.style.transition = 'none';
+    clearInterval(autoTimer);
+  }, {passive:true});
+  wrap.addEventListener('touchmove', e => {
+    if(!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    const raw = prevTranslate + dx;
+    const min = -(maxIdx() * getCardWidth());
+    currentTranslate = raw > 0 ? raw*.15 : raw < min ? min+(raw-min)*.15 : raw;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }, {passive:true});
+  wrap.addEventListener('touchend', e => {
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40){
+      snapTo(dx < 0 ? activeIdx+1 : activeIdx-1);
+    } else {
+      snapTo(activeIdx);
+    }
+    prevTranslate = currentTranslate;
+    startAuto();
+  }, {passive:true});
+
+  // Mouse
+  wrap.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.clientX;
+    track.style.transition = 'none';
+    wrap.style.cursor='grabbing';
+    clearInterval(autoTimer);
+  });
+  window.addEventListener('mousemove', e => {
+    if(!isDragging) return;
+    const dx = e.clientX - startX;
+    const raw = prevTranslate + dx;
+    const min = -(maxIdx() * getCardWidth());
+    currentTranslate = raw > 0 ? raw*.15 : raw < min ? min+(raw-min)*.15 : raw;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  });
+  window.addEventListener('mouseup', e => {
+    if(!isDragging) return;
+    isDragging = false;
+    wrap.style.cursor='';
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 40){
+      snapTo(dx < 0 ? activeIdx+1 : activeIdx-1);
+    } else {
+      snapTo(activeIdx);
+    }
+    prevTranslate = currentTranslate;
+    startAuto();
+  });
+
+  // Pausar al hover
+  wrap.addEventListener('mouseenter', ()=>clearInterval(autoTimer));
+  wrap.addEventListener('mouseleave', ()=>startAuto());
+
+  // Recalcular en resize
+  window.addEventListener('resize', ()=>{
+    track.style.transition='none';
+    snapTo(Math.min(activeIdx, maxIdx()), false);
+  });
+
+  startAuto();
+  updateDots();
+})();
+
+// ═══════════════════════════════════════
+//  NAVEGACION — historial real
+// ═══════════════════════════════════════
+// Mapa de nombres legibles para el breadcrumb
+const PAGE_LABELS = {
+  'main':         'Inicio',
+  'polaroids':    'Polaroids',
+  'fotos':        'Fotos',
+  'cuadernos':    'Cuadernos',
+  'disenios':     'Diseños',
+  'imantadas':    'Imantadas',
+  'promo-verano': 'Pack Verano',
+  'promo-proceso':'Nuestro proceso',
+  'promo-kits':   'Kits para regalar',
+};
+
+// Historial interno: array de pageIds
+let navHistory = [];
+
+function buildBreadcrumb(pageId){
+  const bc = document.getElementById('bc-' + pageId);
+  if(!bc) return;
+
+  bc.innerHTML=''; // limpiar
+
+  // Botón Volver
+  const backBtn = document.createElement('button');
+  backBtn.className = 'breadcrumb-back';
+  backBtn.setAttribute('aria-label','Volver');
+  backBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Volver`;
+  backBtn.addEventListener('click', _goBack);
+  bc.appendChild(backBtn);
+
+  // Inicio siempre primero
+  const home = document.createElement('span');
+  home.className = 'bc-crumb';
+  home.textContent = 'Inicio';
+  home.addEventListener('click', showMain);
+  bc.appendChild(home);
+
+  // Añadir cada nivel del historial excepto el actual
+  navHistory.forEach((hId, i) => {
+    const sep = document.createElement('span');
+    sep.className = 'bc-sep';
+    sep.textContent = '›';
+    bc.appendChild(sep);
+
+    const crumb = document.createElement('span');
+    crumb.className = 'bc-crumb';
+    crumb.textContent = PAGE_LABELS[hId] || hId;
+    // Al hacer click en un crumb intermedio, navegar a esa página
+    const capturedId = hId;
+    const capturedHistoryUpTo = navHistory.slice(0, i); // historia hasta ese punto
+    crumb.addEventListener('click', ()=>{
+      navHistory = capturedHistoryUpTo;
+      _doShowDetail(capturedId);
+    });
+    bc.appendChild(crumb);
+  });
+
+  // Página actual
+  if(navHistory.length > 0 || pageId !== 'main'){
+    const sep = document.createElement('span');
+    sep.className = 'bc-sep';
+    sep.textContent = '›';
+    bc.appendChild(sep);
+  }
+
+  const current = document.createElement('span');
+  current.className = 'bc-current';
+  current.textContent = PAGE_LABELS[pageId] || pageId;
+  bc.appendChild(current);
+
+  // Aplicar estado del banner
+  const bannerGone = document.getElementById('news-banner').classList.contains('hidden-bar');
+  bc.classList.toggle('banner-gone', bannerGone);
+}
+
+function showDetail(pageId){
+  // Guardar la página actual en el historial antes de navegar
+  const currentActive = document.querySelector('.page-detail.active');
+  const mainVisible = !document.getElementById('page-main').classList.contains('hidden');
+
+  if(!mainVisible && currentActive){
+    const curId = currentActive.id.replace('page-','');
+    // Solo agregar si no es la misma
+    if(curId !== pageId){
+      navHistory.push(curId);
+    }
+  } else if(mainVisible){
+    navHistory = []; // reset si venimos del main
+  }
+
+  history.pushState({pageId}, '', '');
+  _doShowDetail(pageId);
+}
+
+function _doShowDetail(pageId){
+  document.getElementById('page-main').classList.add('hidden');
+  document.querySelectorAll('.page-detail').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById('page-'+pageId);if(!target)return;
+  target.classList.add('active');
+  window.scrollTo({top:0});
+
+  document.querySelectorAll('.bb-btn').forEach(b=>b.classList.remove('active'));
+
+  const reveals=target.querySelectorAll('.reveal');
+  reveals.forEach(el=>el.classList.remove('visible'));
+  setTimeout(()=>{
+    const vh=window.innerHeight;
+    reveals.forEach((el,i)=>{
+      const rect=el.getBoundingClientRect();
+      if(rect.top<vh+40)setTimeout(()=>el.classList.add('visible'),i*60);
+      else obs.observe(el);
+    });
+  },30);
+
+  buildBreadcrumb(pageId);
+}
+
+function showMain(){
+  closeCart();
+  document.querySelectorAll('.page-detail').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-main').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('bb-inicio').classList.add('active');
+  navHistory = [];
+}
+
+function _goBack(){
+  if(navHistory.length > 0){
+    const prev = navHistory.pop();
+    _doShowDetail(prev);
+  } else {
+    showMain();
+  }
+}
+
+function scrollToOrShowMain(sectionId){
+  const mainEl=document.getElementById('page-main');
+  if(mainEl.classList.contains('hidden')){
+    showMain();
+    setTimeout(()=>{const el=document.getElementById(sectionId);if(el)el.scrollIntoView({behavior:'smooth'})},100);
+  } else {
+    const el=document.getElementById(sectionId);if(el)el.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+// ═══════════════════════════════════════
+//  CONFIGURADOR — estado
+// ═══════════════════════════════════════
+const configState = {
+  polaroids: {
+    selectedSize: {id:'comun',name:'Polaroid Común',price:550,dim:'5,5 × 8,5 cm',img:'img/polaroid comun.webp'},
+    qty:1,
+    extras:{
+      disenio:false,
+      imantada:false,
+      imtQty:1,
+      diseniosQty: {}
+    }
+  },
+  fotos: {
+    selectedSize: {id:'mediana',name:'Foto Mediana',price:1000,dim:'10 × 14,5 cm',img:'img/foto mediana.webp'},
+    qty:1,
+    extras:{acabado:'brillante'}
+  },
+  cuadernos: {
+    selectedSize: {id:'c1',name:'Cuaderno Tapa 1',price:3500,dim:'A5 · 14.8 × 21 cm',img:'img/cuaderno 1.webp'},
+    qty:1,
+    pagesQty: {}
+  },
+};
+
+// ═══════════════════════════════════════
+//  DISEÑOS POLAROIDS — lista
+// ═══════════════════════════════════════
+const DISENIOS_LIST = [
+  {id:'corazones1',label:'Corazones 1',img:'img/corazones 1.webp'},
+  {id:'corazones2',label:'Corazones 2',img:'img/corazones 2.webp'},
+  {id:'arcoiris',label:'Arcoíris',img:'img/arcoiris.webp'},
+  {id:'asteriscos',label:'Asteriscos',img:'img/asteriscos.webp'},
+  {id:'cuadam',label:'Cuad. Amarillo',img:'img/cuadrados amarillo.webp'},
+  {id:'cuadar',label:'Cuad. Naranja',img:'img/cuadrados naranja.webp'},
+  {id:'cuadav',label:'Cuad. Verde',img:'img/cuadrados verde.webp'},
+  {id:'estrellasCol',label:'Estrellas Col.',img:'img/estrellas colores.webp'},
+  {id:'estrellas',label:'Estrellas',img:'img/estrellas.webp'},
+  {id:'frutillas',label:'Frutillas',img:'img/frutillas.webp'},
+  {id:'manchas',label:'Manchas',img:'img/manchas.webp'},
+  {id:'puntos',label:'Puntos',img:'img/puntos.webp'},
+  {id:'vaca',label:'Vaca',img:'img/vaca.webp'},
+];
+
+const CUAD_PAGES_MAX = 8;
+const CUAD_PAGES_LIST = [
+  {id:'p1',  label:'Página 01',  img:'img/p1.webp'},
+  {id:'p2',  label:'Página 02',  img:'img/p2.webp'},
+  {id:'p3',  label:'Página 03',  img:'img/p3.webp'},
+  {id:'p4',  label:'Página 04',  img:'img/p4.webp'},
+  {id:'p5',  label:'Página 05',  img:'img/p5.webp'},
+  {id:'p6',  label:'Página 06',  img:'img/p6.webp'},
+  {id:'p7',  label:'Página 07',  img:'img/p7.webp'},
+];
+
+function buildCuadPagesGrid(){
+  const grid = document.getElementById('cuad-pages-grid');
+  if(!grid) return;
+  const count = CUAD_PAGES_LIST.length;
+  const cols = count <= 3 ? count : count <= 6 ? 3 : count <= 8 ? 4 : count <= 12 ? 4 : 5;
+  grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  grid.innerHTML = CUAD_PAGES_LIST.map((p, idx) => `
+    <div class="cuad-page-slot" id="cuad-slot-${idx}">
+      <div class="cuad-slot-img">
+        <span class="cuad-slot-number">${String(idx+1).padStart(2,'0')}</span>
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.label}" loading="lazy">`
+          : `<div class="slot-placeholder">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+               <span>${p.label}</span>
+             </div>`
+        }
+      </div>
+      <div class="cuad-slot-counter">
+        <button class="csc-btn" id="cuad-slot-minus-${idx}" onclick="changeCuadPageQty(${idx},-1)" disabled>−</button>
+        <span class="csc-val zero" id="cuad-slot-val-${idx}">0</span>
+        <button class="csc-btn" id="cuad-slot-plus-${idx}" onclick="changeCuadPageQty(${idx},1)">+</button>
+      </div>
+      <div class="cuad-page-label">${p.label}</div>
+    </div>
+  `).join('');
+}
+
+function getCuadPagesTotal(){
+  return Object.values(configState.cuadernos.pagesQty).reduce((s,v)=>s+v,0);
+}
+function changeCuadPageQty(idx, delta){
+  const state = configState.cuadernos;
+  const current = state.pagesQty[idx] || 0;
+  const total = getCuadPagesTotal();
+  let next = current + delta;
+  if(next < 0) next = 0;
+  if(delta > 0 && total >= CUAD_PAGES_MAX){ showToast(`Máximo ${CUAD_PAGES_MAX} páginas por cuaderno`, '⚠️'); return; }
+  if(next === 0){ delete state.pagesQty[idx]; } else { state.pagesQty[idx] = next; }
+  updateCuadPageSlot(idx);
+  updateCuadPagesProgress();
+  updateConfigPrice('cuadernos');
+}
+function updateCuadPageSlot(idx){
+  const qty = configState.cuadernos.pagesQty[idx] || 0;
+  const slot = document.getElementById(`cuad-slot-${idx}`);
+  const val  = document.getElementById(`cuad-slot-val-${idx}`);
+  const plus = document.getElementById(`cuad-slot-plus-${idx}`);
+  const minus= document.getElementById(`cuad-slot-minus-${idx}`);
+  if(!slot||!val||!plus||!minus) return;
+  val.textContent = qty;
+  val.classList.toggle('zero', qty === 0);
+  slot.classList.toggle('has-qty', qty > 0);
+  minus.disabled = (qty === 0);
+  const total = getCuadPagesTotal();
+  plus.disabled = (total >= CUAD_PAGES_MAX);
+}
+function updateAllCuadSlotButtons(){
+  const total = getCuadPagesTotal();
+  CUAD_PAGES_LIST.forEach((_,idx)=>{
+    const plus = document.getElementById(`cuad-slot-plus-${idx}`);
+    if(plus) plus.disabled = (total >= CUAD_PAGES_MAX);
+  });
+}
+function updateCuadPagesProgress(){
+  const total = getCuadPagesTotal();
+  const countEl = document.getElementById('cuad-pages-count');
+  const barEl   = document.getElementById('cuad-pages-bar');
+  if(countEl){ countEl.textContent = total; countEl.classList.toggle('complete', total === CUAD_PAGES_MAX); }
+  if(barEl){ const pct = Math.min(100, Math.round(total / CUAD_PAGES_MAX * 100)); barEl.style.width = pct + '%'; barEl.classList.toggle('complete', total === CUAD_PAGES_MAX); }
+  updateAllCuadSlotButtons();
+}
+
+// ═══════════════════════════════════════
+//  DISEÑOS POLAROIDS — contador
+// ═══════════════════════════════════════
+function buildDiseniosPicker(){
+  const grid = document.getElementById('pol-disenios-pick-grid');
+  if(!grid) return;
+  grid.innerHTML = DISENIOS_LIST.map(d => `
+    <div class="disenio-pick-card" id="dpick-${d.id}">
+      <div class="disenio-pick-img"><img src="${d.img}" alt="${d.label}" loading="lazy"></div>
+      <div class="disenio-pick-label">${d.label}</div>
+      <div class="dp-counter">
+        <button class="dp-counter-btn" id="dp-minus-${d.id}" onclick="changeDisenioQty('${d.id}','${d.label}',-1)" disabled>−</button>
+        <span class="dp-counter-val zero" id="dp-val-${d.id}">0</span>
+        <button class="dp-counter-btn" id="dp-plus-${d.id}" onclick="changeDisenioQty('${d.id}','${d.label}',1)">+</button>
+      </div>
+    </div>
+  `).join('');
+
+  // ═══ SCROLL FIX: cuando el grid está al tope/fondo, dejar que la página scrollee ═══
+  grid.addEventListener('wheel', e => {
+    const atTop = grid.scrollTop === 0;
+    const atBottom = grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 1;
+    if((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)){
+      e.preventDefault();
+      window.scrollBy({top: e.deltaY, behavior:'auto'});
+    }
+  }, {passive:false});
+}
+
+function getDiseniosTotal(){
+  return Object.values(configState.polaroids.extras.diseniosQty).reduce((s,v)=>s+v,0);
+}
+function changeDisenioQty(id, label, delta){
+  const state = configState.polaroids;
+  const maxQty = state.qty;
+  const current = state.extras.diseniosQty[id] || 0;
+  const total = getDiseniosTotal();
+  let next = current + delta;
+  if(next < 0) next = 0;
+  if(delta > 0 && total >= maxQty){ showToast(`Máximo ${maxQty} diseño${maxQty>1?'s':''} — igual a la cantidad de polaroids`, '⚠️'); return; }
+  if(next === 0){ delete state.extras.diseniosQty[id]; } else { state.extras.diseniosQty[id] = next; }
+  updateDisenioCard(id);
+  updateDiseniosTotalBar();
+  updateConfigPrice('polaroids');
+}
+function updateDisenioCard(id){
+  const qty  = configState.polaroids.extras.diseniosQty[id] || 0;
+  const card = document.getElementById(`dpick-${id}`);
+  const val  = document.getElementById(`dp-val-${id}`);
+  const plus = document.getElementById(`dp-plus-${id}`);
+  const minus= document.getElementById(`dp-minus-${id}`);
+  if(!card||!val||!plus||!minus) return;
+  val.textContent = qty;
+  val.classList.toggle('zero', qty === 0);
+  card.classList.toggle('has-qty', qty > 0);
+  minus.disabled = (qty === 0);
+  const total = getDiseniosTotal();
+  plus.disabled = (total >= configState.polaroids.qty);
+}
+function updateAllDesenioPlusButtons(){
+  const total  = getDiseniosTotal();
+  const maxQty = configState.polaroids.qty;
+  DISENIOS_LIST.forEach(d => {
+    const plus = document.getElementById(`dp-plus-${d.id}`);
+    if(plus) plus.disabled = (total >= maxQty);
+  });
+}
+function updateDiseniosTotalBar(){
+  const total  = getDiseniosTotal();
+  const maxQty = configState.polaroids.qty;
+  const countEl = document.getElementById('pol-dtb-count');
+  const maxEl   = document.getElementById('pol-dtb-max');
+  const barEl   = document.getElementById('pol-dtb-bar');
+  const barWrap = document.getElementById('pol-disenios-total-bar');
+  if(countEl) countEl.textContent = total;
+  if(maxEl)   maxEl.textContent   = `/ ${maxQty} polaroid${maxQty>1?'s':''} con diseño`;
+  if(barEl){
+    const pct = maxQty > 0 ? Math.min(100, Math.round(total / maxQty * 100)) : 0;
+    barEl.style.width = pct + '%';
+    barEl.style.background = (total === maxQty && maxQty > 0) ? '#2a7a3b' : 'var(--accent)';
+  }
+  if(barWrap) barWrap.classList.toggle('at-max', total === maxQty && maxQty > 0);
+  updateAllDesenioPlusButtons();
+}
+
+// ═══════════════════════════════════════
+//  CONFIGURADOR — funciones compartidas
+// ═══════════════════════════════════════
+function selectSize(card, product){
+  const gridId = product==='polaroids'?'pol':product==='fotos'?'foto':'cuad';
+  document.querySelectorAll(`#${gridId}-sizes-grid .size-card`).forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  const s = {id:card.dataset.id,name:card.dataset.name,price:parseInt(card.dataset.price),dim:card.dataset.dim,img:card.dataset.img};
+  configState[product].selectedSize = s;
+  const heroImg = document.getElementById(`${gridId}-hero-img`);
+  if(heroImg) heroImg.src = s.img;
+  updateConfigPrice(product);
+}
+function changeConfigQty(product, delta){
+  const inp = document.getElementById(`${productPrefix(product)}-qty`);
+  let v = parseInt(inp.value)||1;
+  v = Math.max(1, v + delta);
+  inp.value = v;
+  configState[product].qty = v;
+  if(product === 'polaroids'){
+    const dq = configState.polaroids.extras.diseniosQty;
+    let excess = getDiseniosTotal() - v;
+    if(excess > 0){
+      [...DISENIOS_LIST].reverse().forEach(d => {
+        if(excess <= 0) return;
+        const cur = dq[d.id] || 0;
+        if(cur > 0){ const cut = Math.min(cur, excess); dq[d.id] = cur - cut; if(dq[d.id] === 0) delete dq[d.id]; excess -= cut; }
+      });
+      DISENIOS_LIST.forEach(d => updateDisenioCard(d.id));
+    }
+    updateDiseniosTotalBar();
+  }
+  updateConfigPrice(product);
+}
+function productPrefix(p){ return p==='polaroids'?'pol':p==='fotos'?'foto':'cuad'; }
+function updateConfigPrice(product){
+  const state = configState[product];
+  const inp = document.getElementById(`${productPrefix(product)}-qty`);
+  if(inp) state.qty = Math.max(1, parseInt(inp.value)||1);
+  const qty = state.qty;
+  const baseUnit = state.selectedSize.price;
+  const baseTotal = baseUnit * qty;
+  let discountPct = 0, discountInfo = '';
+  const qtyDisc = getQtyDiscount(product, qty);
+  if(qtyDisc){ discountPct = qtyDisc.pct; discountInfo = `🏷️ ${qtyDisc.label}`; }
+  let discountedBase = discountPct > 0 ? Math.round(baseTotal * (1 - discountPct/100)) : baseTotal;
+  let total = discountedBase;
+  let extras = [];
+  if(product === 'polaroids'){
+    if(state.extras.imantada){ const c=state.extras.imtQty*500; total+=c; extras.push(`${state.extras.imtQty} imantada${state.extras.imtQty>1?'s':''} +${fmt(c)}`); }
+    const dTotal = getDiseniosTotal();
+    if(state.extras.disenio && dTotal > 0){
+      const summary = DISENIOS_LIST.filter(d=>(state.extras.diseniosQty[d.id]||0)>0).map(d=>`${d.label}×${state.extras.diseniosQty[d.id]}`).join(', ');
+      extras.push(`diseño: ${summary}`);
+    }
+  }
+  const priceDisplay   = document.getElementById(`${productPrefix(product)}-price-display`);
+  const priceOriginal  = document.getElementById(`${productPrefix(product)}-price-original`);
+  const priceDetail    = document.getElementById(`${productPrefix(product)}-price-detail`);
+  const discountInfoEl = document.getElementById(`${productPrefix(product)}-discount-info`);
+  if(priceDisplay) priceDisplay.textContent = fmt(total);
+  if(priceOriginal){ priceOriginal.textContent = fmt(baseTotal); priceOriginal.style.display = discountPct>0 ? 'block' : 'none'; }
+  let detail = `${qty} × ${state.selectedSize.name} · ${fmt(baseUnit)} c/u`;
+  if(discountPct>0) detail += ` · −${discountPct}%`;
+  if(extras.length) detail += ' · ' + extras.join(' · ');
+  if(priceDetail) priceDetail.textContent = detail;
+  if(discountInfoEl){
+    if(discountInfo){ discountInfoEl.innerHTML = `<span class="discount-badge">${discountInfo}</span>`; }
+    else { const tiers = QTY_DISCOUNTS[product]; if(tiers){ const next=[...tiers].reverse().find(t=>qty<t.min); if(next) discountInfoEl.innerHTML=`<span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--soft)">Sumá ${next.min-qty} más y obtenés ${next.pct}% off 💡</span>`; else discountInfoEl.innerHTML=''; } else discountInfoEl.innerHTML=''; }
+  }
+  if(product === 'polaroids') updateDiseniosTotalBar();
+}
+function toggleExtra(product, key){
+  const state = configState[product];
+  const prefixes = { polaroids:{disenio:'pol-disenios-picker',imantada:'pol-imantadas-sub'} };
+  const toggleIds = { polaroids:{disenio:'pol-toggle-disenio',imantada:'pol-toggle-imantada'} };
+  if(product==='polaroids'){ if(key==='disenio')state.extras.disenio=!state.extras.disenio; if(key==='imantada')state.extras.imantada=!state.extras.imantada; }
+  const sub=document.getElementById(prefixes[product]?.[key]);
+  const toggle=document.getElementById(toggleIds[product]?.[key]);
+  if(!sub||!toggle) return;
+  let isOpen;
+  if(product==='polaroids') isOpen=key==='disenio'?state.extras.disenio:state.extras.imantada;
+  else isOpen=false;
+  sub.classList.toggle('open',isOpen);
+  sub.style.display=isOpen?'block':'none';
+  toggle.classList.toggle('active',isOpen);
+  if(product==='polaroids'&&key==='disenio') updateDiseniosTotalBar();
+  updateConfigPrice(product);
+}
+function changeImtQty(product, delta){
+  const state = configState[product];
+  state.extras.imtQty = Math.max(1, Math.min(state.qty, (state.extras.imtQty||1) + delta));
+  document.getElementById(`${productPrefix(product)}-imt-qty`).textContent = state.extras.imtQty;
+  updateConfigPrice(product);
+}
+function addConfigToCart(product){
+  const state = configState[product];
+  const qty = state.qty;
+  const baseUnit = state.selectedSize.price;
+  const baseTotal = baseUnit * qty;
+  const qtyDisc = getQtyDiscount(product, qty);
+  const discountedBase = qtyDisc ? Math.round(baseTotal*(1-qtyDisc.pct/100)) : baseTotal;
+  let name = `${state.selectedSize.name} x${qty}`;
+  let extraParts = [];
+  if(product==='polaroids'){
+    const dTotal = getDiseniosTotal();
+    if(state.extras.disenio && dTotal>0){
+      const summary = DISENIOS_LIST.filter(d=>(state.extras.diseniosQty[d.id]||0)>0).map(d=>`${d.label}×${state.extras.diseniosQty[d.id]}`).join('+');
+      extraParts.push(`diseño: ${summary}`);
+    }
+    if(state.extras.imantada) extraParts.push(`${state.extras.imtQty} imantada${state.extras.imtQty>1?'s':''}`);
+  } else if(product==='fotos'){
+    extraParts.push(`acabado ${state.extras.acabado||'brillante'}`);
+  } else if(product==='cuadernos'){
+    const pTotal = getCuadPagesTotal();
+    if(pTotal > 0){
+      const pagesSummary = CUAD_PAGES_LIST.map((p,i)=>{ const n = state.pagesQty[i]||0; return n>0 ? `${p.label}×${n}` : null; }).filter(Boolean).join(', ');
+      extraParts.push(`páginas: ${pagesSummary}`);
+    }
+  }
+  if(qtyDisc) extraParts.push(`${qtyDisc.pct}% off`);
+  if(extraParts.length) name += ` (${extraParts.join(', ')})`;
+  let imtExtra = 0;
+  if(product==='polaroids'&&state.extras.imantada) imtExtra=(state.extras.imtQty||1)*500;
+  const totalPrice = discountedBase + imtExtra;
+  const existing = cart.find(i=>i.name===name);
+  if(existing){ existing.qty++; } else { cart.push({name,price:totalPrice,qty:1}); }
+  renderCart();
+  showToast(name.split('(')[0].trim(),'🛍️');
+  openCart();
+}
+
+// ═══════════════════════════════════════
+//  HERO SLIDER
+// ═══════════════════════════════════════
+let slideIndex=0;
+const slTrack=document.getElementById('sliderTrack');
+const totalSlides=document.querySelectorAll('.slide').length;
+function moveSlider(n){slideIndex=(slideIndex+n+totalSlides)%totalSlides;slTrack.style.transform=`translateX(-${slideIndex*100}%)`;resetTimer()}
+let timer=setInterval(()=>moveSlider(1),5000);
+function resetTimer(){clearInterval(timer);const prog=document.querySelector('.slider-progress');if(prog){prog.style.animation='none';prog.offsetHeight;prog.style.animation='progress 5s linear infinite'}timer=setInterval(()=>moveSlider(1),5000)}
+
+// ═══════════════════════════════════════
+//  NAV DROPDOWNS
+// ═══════════════════════════════════════
+function toggleNavDrop(id){const el=document.getElementById(id);const wasOpen=el.classList.contains('open');closeNavDrops();if(!wasOpen)el.classList.add('open')}
+function toggleNavSubDrop(menuId,btn){const menu=document.getElementById(menuId);const isOpen=menu.classList.contains('open');menu.classList.toggle('open');const caret=btn.querySelector('.sub-caret');if(caret)caret.style.transform=isOpen?'':'rotate(180deg)'}
+function closeNavDrops(){document.querySelectorAll('.nav-dropdown').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.nav-sub-submenu').forEach(el=>el.classList.remove('open'))}
+document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))closeNavDrops()});
+function toggleMobDrop(id){document.getElementById(id).classList.toggle('open')}
+function toggleMobSubDrop(subId){document.getElementById(subId).classList.toggle('open')}
+function closeMobileNav(){document.getElementById('mobile-nav').classList.remove('open')}
+
+// ═══════════════════════════════════════
+//  REVEAL SCROLL
+// ═══════════════════════════════════════
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ═══════════════════════════════════════
+//  INICIALIZACIÓN
+// ═══════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('coupon-input').addEventListener('keydown',e=>{if(e.key==='Enter')applyCoupon()});
+  document.getElementById('bb-inicio').classList.add('active');
+
+  buildDiseniosPicker();
+  buildCuadPagesGrid();
+  updateConfigPrice('polaroids');
+  updateConfigPrice('fotos');
+  updateConfigPrice('cuadernos');
+  updateDiseniosTotalBar();
+  updateCuadPagesProgress();
+
+  // Video mobile
+  const video = document.querySelector('#galeria video');
+  if(video){
+    video.setAttribute('playsinline','');
+    video.setAttribute('webkit-playsinline','');
+    video.muted = true;
+    video.play().catch(()=>{});
+    document.addEventListener('touchstart', ()=>{ video.play().catch(()=>{}); }, {once:true, passive:true});
+  }
+
+  // NAV scroll
+  const nav=document.getElementById('site-nav');
+  const banner=document.getElementById('news-banner');
+  let lastY=window.scrollY,ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const y=window.scrollY;
+        const bannerH=banner.offsetHeight||36;
+        const bannerGone=y>bannerH;
+        if(bannerGone){banner.classList.add('hidden-bar');nav.classList.add('banner-gone');document.querySelectorAll('.breadcrumb').forEach(b=>b.classList.add('banner-gone'));}
+        else{banner.classList.remove('hidden-bar');nav.classList.remove('banner-gone');document.querySelectorAll('.breadcrumb').forEach(b=>b.classList.remove('banner-gone'));}
+        if(y>lastY&&y>80){nav.classList.add('nav-hidden');document.querySelectorAll('.breadcrumb').forEach(b=>b.classList.add('crumb-hidden'));}
+        else{nav.classList.remove('nav-hidden');document.querySelectorAll('.breadcrumb').forEach(b=>b.classList.remove('crumb-hidden'));}
+        nav.classList.toggle('nav-scrolled',y>40);
+        lastY=y;ticking=false;
+      });
+      ticking=true;
+    }
+  },{passive:true});
+
+  // Back/forward browser
+  window.addEventListener('popstate',()=>{
+    if(navHistory.length>0){ const prev=navHistory.pop(); _doShowDetail(prev); }
+    else showMain();
+  });
+
+  // ESC
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='Escape'){
+      if(document.getElementById('mobile-nav').classList.contains('open')){document.getElementById('mobile-nav').classList.remove('open');return;}
+      if(document.getElementById('cart-panel').classList.contains('open')){closeCart();return;}
+      const active=document.querySelector('.page-detail.active');
+      if(active)_goBack();
+    }
+  });
+
+  // Swipe derecha para volver (edge del lado izquierdo)
+  let touchStartX=0,touchStartY=0;
+  document.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
+  document.addEventListener('touchend',(e)=>{
+    const dx=e.changedTouches[0].clientX-touchStartX;const dy=Math.abs(e.changedTouches[0].clientY-touchStartY);
+    const active=document.querySelector('.page-detail.active');const cartOpen=document.getElementById('cart-panel').classList.contains('open');
+    if(active&&!cartOpen&&dx>70&&dy<60&&touchStartX<55)_goBack();
+  },{passive:true});
+});
+</script>
+</body>
+</html>
